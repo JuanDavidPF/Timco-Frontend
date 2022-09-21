@@ -1,0 +1,23 @@
+.landingPage__main {
+    display: flex;
+    width: 100%;
+
+    margin-bottom: 82px;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-right: 46px;
+
+}
+
+
+.landingPage__main__info>p {
+    margin-top: 20px;
+
+}
+
+.landingPage__main__engagingBtns {
+    margin-top: 64px;
+    display: flex;
+    gap: 20px;
+}

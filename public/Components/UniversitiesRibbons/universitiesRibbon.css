@@ -1,0 +1,24 @@
+.universitiesRibbon {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 130px;
+    padding: 18px 65px;
+
+    width: 100%;
+
+    border-radius: 10px;
+    background-color: var(--gray);
+
+
+}
+
+.universitiesRibbon__label {
+    width: 100%;
+    max-width: 1720px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: var(--darkerGray);
+}
