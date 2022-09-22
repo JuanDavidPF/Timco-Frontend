@@ -9,10 +9,17 @@
     color: var(--indigo);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Poppins', sans-serif;
+}
 
 h1 {
     font-size: 48px;
-    font-family: 'Poppins', sans-serif;
+
     line-height: 50px;
 }
 
@@ -21,6 +28,10 @@ p {
     font-family: 'Barlow', sans-serif;
 }
 
+h6 {
+    font-size: 20px;
+    font-family: 'Barlow', sans-serif;
+}
 
 html,
 body {
@@ -34,7 +45,39 @@ body {
 
 
     width: 100%;
-    padding: 0 90px;
+    padding: 0 var(--bodyPadding);
     background-color: var(--main-bg-color);
     max-width: var(--maxBodyWidth);
+}
+
+@media (max-width: 900px) {
+
+    h1 {
+        font-size: 36px;
+
+        line-height: 36px;
+    }
+
+    p,
+    h6 {
+        font-size: 22px;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    h1 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    p,
+    h6 {
+        font-size: 18px;
+
+    }
+
 }

@@ -21,3 +21,14 @@
     justify-content: center;
 
 }
+
+@media (max-width: 900px) {
+    .landingPage__header__logo__iso {
+        width: 54px;
+    }
+
+    .landingPage__header__logo__logo {
+        display: none;
+
+    }
+}

@@ -4,6 +4,23 @@
     --ctaAccent: #F7863C;
     --gray: #F1F1F1;
     --darkerGray: #BDBDBD;
+    --bodyPadding: 100px;
+    --maxBodyWidth: 1920px;
 
-    --maxBodyWidth: 1700px;
+
+
+}
+
+
+@media (max-width: 900px) {
+    :root {
+        --bodyPadding: 50px;
+    }
+}
+
+
+@media (max-width: 500px) {
+    :root {
+        --bodyPadding: 28px;
+    }
 }
