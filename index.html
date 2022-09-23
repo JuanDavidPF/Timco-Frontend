@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="./public/Containers/LandingPage/resources/images/isotype.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./public/Pages/LandingPage/resources/images/favicon.png" type="image/x-icon">
 
     <title>Timco - Landing</title>
 
-    <link rel="stylesheet" href="/public/Containers/LandingPage/variables.css">
 
-    <link rel="stylesheet" href="./public/Containers/LandingPage/landingPage.css">
+    <!-- Api -->
+    <script type="module" src="./public/src/TimcoApi.js"></script>
 
-    <!-- Sections -->
+    <!-- Page styles -->
+    <link rel="stylesheet" href="/public/Pages/LandingPage/variables.css">
+    <link rel="stylesheet" href="./public/Pages/LandingPage/landingPage.css">
+
+    <!-- Sections Styles -->
     <link rel="stylesheet" href="./public/Components/LandingPageHeader/landingPage_header.css">
     <link rel="stylesheet" href="./public/Components/LandingPageMain/landingPage_main.css">
     <link rel="stylesheet" href="./public/Components/UniversitiesRibbons/universitiesRibbon.css">
@@ -23,7 +27,7 @@
     <link rel="stylesheet" href="./public/Components/LandingOurProcess/landingPage_our_process.css">
     <link rel="stylesheet" href="./public/Components/LandingPageFooter/landingPage_footer.css">
 
-    <!-- Components -->
+    <!-- Component styles -->
     <link rel="stylesheet" href="./public/Components/CTA_Button/cta-button.css">
 
 </head>
@@ -34,12 +38,12 @@
     <!------------------------------------------->
     <header class="landingPage__header">
         <a class="landingPage__header__logo" href="#">
-            <img class="landingPage__header__logo__iso"
-                src="./public/Containers/LandingPage/resources/images/isotype.png" alt="">
-            <img class="landingPage__header__logo__logo"
-                src="./public/Containers/LandingPage/resources/images/logotype.png" alt="">
+            <img class="landingPage__header__logo__iso" src="./public/Pages/LandingPage/resources/images/isotype.png"
+                alt="">
+            <img class="landingPage__header__logo__logo" src="./public/Pages/LandingPage/resources/images/logotype.png"
+                alt="">
         </a>
-        <button class="cta_button">Ingresar</button>
+        <a href="./public/Pages/Student/Login/login.html"><button class="cta_button">Ingresar</button></a>
     </header>
 
     <!----------------------------------------->
@@ -53,8 +57,10 @@
             </p>
 
             <div class="landingPage__main__engagingBtns">
-                <button class="cta_button ">Aplica como talento</button>
-                <button class="cta_button --accented">Contrata talento</button>
+                <a href="./public/Pages/Student/Login/login.html"> <button class="cta_button">Aplica como
+                        talento</button>
+                    <a href="./public/Pages/Recruiter/Login/login.html"> <button class="cta_button --accented">Contrata
+                            talento</button></a>
             </div>
         </div>
 
@@ -133,7 +139,8 @@
                     <p><strong>Contratar de manera rápida</strong> por medio de la metodología “One Click Contract”</p>
                 </li>
             </ul>
-            <button class="cta_button --accented">QUIERO CONTRATAR TALENTO</button>
+            <a href="./public/Pages/Recruiter/Login/login.html"> <button class="cta_button --accented">QUIERO CONTRATAR
+                    TALENTO</button></a>
         </div>
     </section>
 
@@ -166,6 +173,15 @@
                 </label>
                 <input required="true" type="email" name="" id="recruiterEmail" placeholder="Email">
             </div>
+
+            <div class="landingPage__registration__form__textInput">
+                <label for="recruiterPassword">
+                    <p>Password*</p>
+                </label>
+                <input autocomplete="new-password" minlength="6" required="true" type="password" name=""
+                    id="recruiterPassword" placeholder="Password">
+            </div>
+
             <button type="submit" class="cta_button --accented">REGISTRARME</button>
         </form>
 
@@ -174,7 +190,7 @@
     <!----------------Process--------------------->
     <!-------------------------------------------->
     <section class="landingPage__ourProcess">
-        <img src="./public/Containers/LandingPage/resources/images/isotype.png" alt="">
+        <img src="./public/Pages/LandingPage/resources/images/isotype.png" alt="">
         <h1>Nuestro Proceso de<br>contratación</h1>
 
 
@@ -253,7 +269,7 @@
     <!------------------------------------------->
     <!----------------Scripts--------------------->
     <!------------------------------------------->
-    <script type="module" src="./public/Containers/LandingPage/landingPage.js"></script>
+    <script type="module" src="./public/Pages/LandingPage/landingPage.js"></script>
 
 </body>
 
