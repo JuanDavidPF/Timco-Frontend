@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap');
+
+
+
+
+.textInput {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 2px 0;
+}
+
+.textInput>input {
+    font-family: 'Inter', sans-serif;
+    padding: 16px 24px;
+    border: 1px solid var(--darkerGray);
+    border-radius: 14px;
+
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    color: black;
+    vertical-align: middle;
+}
+
+.textInputinput::placeholder {
+
+    color: var(--darkerGray);
+    font-weight: 300;
+}
+
+
+
+.textInput p {
+    text-align: left;
+}

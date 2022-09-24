@@ -7,14 +7,56 @@
     --bodyPadding: 100px;
     --maxBodyWidth: 1920px;
 
-
-
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    color: var(--indigo);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 48px;
+
+    line-height: 50px;
+}
+
+p {
+    font-size: 24px;
+    font-family: 'Barlow', sans-serif;
+}
+
+h6 {
+    font-size: 20px;
+    font-family: 'Barlow', sans-serif;
+}
+
+
 
 
 @media (max-width: 900px) {
     :root {
         --bodyPadding: 50px;
+    }
+
+    h1 {
+        font-size: 36px;
+
+        line-height: 36px;
+    }
+
+    p,
+    h6 {
+        font-size: 22px;
+
     }
 }
 
@@ -22,5 +64,16 @@
 @media (max-width: 500px) {
     :root {
         --bodyPadding: 28px;
+    }
+
+    h1 {
+        font-size: 30px;
+        line-height: 30px;
+    }
+
+    p,
+    h6 {
+        font-size: 18px;
+
     }
 }

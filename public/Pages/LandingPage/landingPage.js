@@ -1,4 +1,4 @@
-import API from "../../src/TimcoApi.js";
+import API from "./../../src/TimcoApi.js";
 
 
 
