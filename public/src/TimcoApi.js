@@ -10,7 +10,7 @@ const API = (() => {
     // Api to test post and get requests ->
     // read how it works at: http://ptsv2.com/
 
-    const toiletApi = "http://ptsv2.com/";
+    const toiletApi = "https://ptsv2.com/";
     const toiletID = "o6jno-1663906012";
     const postURL = `${toiletApi}/t/${toiletID}/post`
 
