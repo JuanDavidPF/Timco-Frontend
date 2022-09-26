@@ -10,7 +10,8 @@
     padding: 2px 0;
 }
 
-.textInput>input {
+.textInput>input,
+.textInput>textarea {
     font-family: 'Inter', sans-serif;
     padding: 16px 24px;
     border: 1px solid var(--darkerGray);
@@ -23,7 +24,8 @@
     vertical-align: middle;
 }
 
-.textInputinput::placeholder {
+.textInput>input::placeholder,
+.textInput>textarea::placeholder {
 
     color: var(--darkerGray);
     font-weight: 300;
