@@ -11,7 +11,7 @@
 }
 
 .selectable_card:hover {
-    background-color: var(--ctaAccent);
+    background-color: var(--ctaAccent) !important;
 
 }
 
@@ -23,12 +23,12 @@
 }
 
 .selectable_card_input:checked+.selectable_card {
-    background-color: var(--ctaAccent);
-    border: 2px solid var(--ctaAccent);
+    background-color: var(--ctaAccent) !important;
+    border: 2px solid var(--ctaAccent) !important;
 }
 
 .selectable_card_input:checked+.selectable_card>h2,
 .selectable_card_input:checked+.selectable_card>p {
-    color: white;
+    color: white !important;
 
 }

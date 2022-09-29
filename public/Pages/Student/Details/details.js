@@ -1,5 +1,5 @@
 import API from "../../../src/TimcoApi.js";
-document.querySelectorAll('input[type="date"]').forEach(input => input.min = new Date().toISOString().split("T")[0]);
+
 const details = {};
 
 const tabs = document.querySelectorAll(".top__tab__navbar>button");
@@ -22,7 +22,7 @@ document.querySelectorAll(".details").forEach((screen, key) => {
             [...e.target.elements].forEach(element => {
                 if (element.name && element.value) details[element.name] = element.value;
             })
-            console.log(details);
+
             NextSection();
         })
     })
@@ -48,7 +48,7 @@ const SetCurrentScreen = (value) => {
 
 
     currentScreen = value;
-    if (form[currentScreen]) currentSection = form[currentScreen].findIndex(section => !section.classList.contains("hidden"));
+    currentSection = form[currentScreen].findIndex(section => !section.classList.contains("hidden"));
 
 
     let nextScreen = screens[currentScreen];
@@ -76,7 +76,7 @@ const NextSection = () => {
 }
 
 
-window.PreviousSection = () => {
+const PreviousSection = () => {
     form[currentScreen][currentSection].classList.add('hidden');
     currentSection--;
 
@@ -91,7 +91,7 @@ window.PreviousSection = () => {
 }
 
 const FinishForm = () => {
-    API.UploadRecruiterDetails(details);
+    API.UploadStudentDetails(details);
 }
 
 SetCurrentScreen(0);
