@@ -234,6 +234,34 @@ const API = (() => {
 
     }//Closes UploadStudentDetails method
 
+    const UploadProject = async (project) => {
+        try {
+
+            const request = await
+                fetch(postURL, {
+                    method: 'POST',
+                    body: JSON.stringify(project)
+                });
+            console.log(request)
+            switch (request.status) {
+
+                case 200:
+
+
+                    break;
+
+                case 404:
+                    console.log(request)
+                    alert("La petición no dió resultado");
+                    break;
+            }
+        } catch (error) {
+
+            alert("Hubo un problema, intentalo de nuevo en unos minutos");
+        }
+    }//Closes UploadStudentDetails method
+
+
     const IsRecruiterLogged = () => {
         return !!localStorage.getItem(loggedRecruiterKey);
     }//Closes IsStudentLogged method
@@ -252,7 +280,9 @@ const API = (() => {
         SignUpRecruiter,
         UploadRecruiterDetails,
         SignOutRecruiter,
+        UploadProject,
         IsRecruiterLogged,
+
     }
 
 })()

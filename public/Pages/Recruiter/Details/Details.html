@@ -159,7 +159,7 @@
 
 
                 <div class="mainCardsForm__form">
-                    <input class="selectable_card_input" required type="radio" name="area" id="UX/UI"
+                    <input class="selectable_card_input" required type="radio" name="projectArea" id="UX/UI"
                         value="UI/UX Design">
 
                     <label class="selectable_card" style="background-color: #E0FE68;" for="UX/UI">
@@ -168,14 +168,15 @@
                     </label>
 
 
-                    <input class="selectable_card_input" required type="radio" name="area" id="Dev" value="Development">
+                    <input class="selectable_card_input" required type="radio" name="projectArea" id="Dev"
+                        value="Development">
 
                     <label class="selectable_card" style="background-color:#8AC2DD;" for="Dev">
                         <img src="./resources/dev.png">
                         <p>Desarrollo</p>
                     </label>
 
-                    <input class="selectable_card_input" required type="radio" name="area" id="Marketing"
+                    <input class="selectable_card_input" required type="radio" name="projectArea" id="Marketing"
                         value="Marketing">
 
                     <label class="selectable_card" style="background-color:#00D380;" for="Marketing">
@@ -267,8 +268,8 @@
                             </span>
                         </p>
                     </label>
-                    <input type="file" name="file[]" id="attachment" style="visibility: hidden; position: absolute;"
-                        multiple />
+                    <input type="file" name="projectFiles[]" id="attachment"
+                        style="visibility: hidden; position: absolute;" multiple />
 
 
                 </p>
@@ -338,16 +339,16 @@
 
                 <div>
                     <p><small>Nombre del Proyecto</small> </p>
-                    <h3>Diseño de interfaces para página web</h3>
+                    <h3 id="summary_projectName">Diseño de interfaces para página web</h3>
                 </div>
                 <div>
 
                     <p><small>Valor del Proyecto</small></p>
-                    <h3>$400.000</h3>
+                    <h3 id="summary_projectBudget">$400.000</h3>
                 </div>
                 <div>
                     <p><small>Fecha de entrega</small></p>
-                    <h3>24 de Feb 2022</h3>
+                    <h3 id="summary_projectDeadline">24 de Feb 2022</h3>
                 </div>
 
 

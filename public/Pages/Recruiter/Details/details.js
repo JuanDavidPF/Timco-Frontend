@@ -1,11 +1,18 @@
 import API from "../../../src/TimcoApi.js";
 document.querySelectorAll('input[type="date"]').forEach(input => input.min = new Date().toISOString().split("T")[0]);
 const details = {};
+const project = {};
 
 const tabs = document.querySelectorAll(".top__tab__navbar>button");
 const form = {}
 
 const screens = [];
+
+
+
+const projectNameHTML = document.querySelector("#summary_projectName");
+const projectBudgetHTML = document.querySelector("#summary_projectBudget");
+const projectDeadlineHTML = document.querySelector("#summary_projectDeadline");
 
 document.querySelectorAll(".details").forEach((screen, key) => {
     screens.push(screen)
@@ -19,10 +26,16 @@ document.querySelectorAll(".details").forEach((screen, key) => {
         if (formInSection) formInSection.addEventListener('submit', e => {
             e.preventDefault();
 
+
             [...e.target.elements].forEach(element => {
-                if (element.name && element.value) details[element.name] = element.value;
+                if (element.name && element.value) {
+
+                    if (element.name.includes("project"))
+                        project[element.name] = element.value;
+                    else details[element.name] = element.value;
+                }
             })
-            console.log(details);
+            FillProjectSummary();
             NextSection();
         })
     })
@@ -90,9 +103,19 @@ window.PreviousSection = () => {
 
 }
 
-const FinishForm = () => {
+const FinishForm = async () => {
+    await API.UploadProject(project);
     API.UploadRecruiterDetails(details);
 }
+
+const FillProjectSummary = () => {
+    if (project.projectName && projectNameHTML) projectNameHTML.textContent = project.projectName;
+    if (project.projectBudget && projectBudgetHTML) projectBudgetHTML.textContent = project.projectBudget;
+    if (project.projectDeadline && projectDeadlineHTML) projectDeadlineHTML.textContent = project.projectDeadline;
+
+
+}//Closes FillProjecSummary method
+
 
 SetCurrentScreen(0);
 
