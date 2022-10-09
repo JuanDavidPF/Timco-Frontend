@@ -52,6 +52,7 @@ h6 {
 @media (max-width: 900px) {
     :root {
         --bodyPadding: 50px;
+        --sideNavbarWidth: 100px;
     }
 
     h1 {
@@ -71,6 +72,7 @@ h6 {
 @media (max-width: 500px) {
     :root {
         --bodyPadding: 28px;
+
     }
 
     h1 {

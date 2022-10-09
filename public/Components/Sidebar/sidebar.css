@@ -48,6 +48,7 @@
 
 
 .sidebar__footer {
+    cursor: pointer;
     border-top: 1px solid var(--darkerGray);
     width: 100%;
     padding: 40px 0;
@@ -56,4 +57,47 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
+    transition: background-color .15s ease-in-out;
+}
+
+.sidebar__footer:hover {
+    background-color: rgb(236, 236, 236);
+}
+
+
+@media (max-width: 900px) {
+    .sidebar {
+        padding: 40px 0;
+    }
+
+    .sidebar>nav {
+
+        align-items: center;
+
+    }
+
+    .sidebar__header>img {
+
+        width: 70px;
+    }
+
+    .sidebar>nav>a {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .sidebar>nav>a>img {
+
+        width: 30px;
+    }
+
+
+
+
+    .sidebar p {
+        display: none;
+    }
+
+
+
 }
