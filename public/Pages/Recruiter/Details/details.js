@@ -14,6 +14,15 @@ const projectNameHTML = document.querySelector("#summary_projectName");
 const projectBudgetHTML = document.querySelector("#summary_projectBudget");
 const projectDeadlineHTML = document.querySelector("#summary_projectDeadline");
 
+
+document.querySelectorAll(".top__tab__navbar>button").forEach((button, key) => {
+    button.addEventListener('click', () => {
+        SetCurrentScreen(key);
+    })
+})
+
+
+
 document.querySelectorAll(".details").forEach((screen, key) => {
     screens.push(screen)
     form[key] = [];

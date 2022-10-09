@@ -13,6 +13,7 @@
 
 .currencyInput>input,
 .textInput>input,
+.textInput>select,
 .textInput>textarea {
     font-family: 'Inter', sans-serif;
     padding: 16px 24px;

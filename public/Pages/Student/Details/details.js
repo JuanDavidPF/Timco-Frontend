@@ -1,11 +1,20 @@
 import API from "../../../src/TimcoApi.js";
-
+document.querySelectorAll('input[type="date"]').forEach(input => input.min = new Date().toISOString().split("T")[0]);
 const details = {};
+
 
 const tabs = document.querySelectorAll(".top__tab__navbar>button");
 const form = {}
 
 const screens = [];
+
+document.querySelectorAll(".top__tab__navbar>button").forEach((button, key) => {
+    button.addEventListener('click', () => {
+        SetCurrentScreen(key);
+
+    })
+})
+
 
 document.querySelectorAll(".details").forEach((screen, key) => {
     screens.push(screen)
@@ -19,9 +28,23 @@ document.querySelectorAll(".details").forEach((screen, key) => {
         if (formInSection) formInSection.addEventListener('submit', e => {
             e.preventDefault();
 
-            [...e.target.elements].forEach(element => {
-                if (element.name && element.value) details[element.name] = element.value;
+
+            [...e.target.elements].forEach((element, index) => {
+                if (!element.name || !element.value) return;
+
+
+                if (element.type == "checkbox") {
+                    if (index == 0) details[element.name] = [];
+                    if (element.checked) details[element.name].push(element.value);
+                    return;
+                }
+
+
+
+                details[element.name] = element.value;
+
             })
+
 
             NextSection();
         })
@@ -48,7 +71,7 @@ const SetCurrentScreen = (value) => {
 
 
     currentScreen = value;
-    currentSection = form[currentScreen].findIndex(section => !section.classList.contains("hidden"));
+    if (form[currentScreen]) currentSection = form[currentScreen].findIndex(section => !section.classList.contains("hidden"));
 
 
     let nextScreen = screens[currentScreen];
@@ -76,7 +99,7 @@ const NextSection = () => {
 }
 
 
-const PreviousSection = () => {
+window.PreviousSection = () => {
     form[currentScreen][currentSection].classList.add('hidden');
     currentSection--;
 
@@ -90,9 +113,13 @@ const PreviousSection = () => {
 
 }
 
-const FinishForm = () => {
+const FinishForm = async () => {
+
     API.UploadStudentDetails(details);
 }
+
+
+
 
 SetCurrentScreen(0);
 
