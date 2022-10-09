@@ -8,12 +8,46 @@
 
     <title>Student - Home</title>
 
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css">
+    <link rel="stylesheet" href="././../../../Components/Sidebar/sidebar.css">
     <script type="module" src="./../../../src/StudentLoggedVerifier.js"></script>
 </head>
 
 <body>
-    STUDENT
-    <button id="signOutButton">SIGN OUT</button>
+    <nav class="sidebar">
+        <div class="sidebar__header">
+            <img src="./../../../Components/Sidebar/resources/logo.png" alt="" srcset="">
+            <img src="./../../../Components/Sidebar/resources/profilePicture.png" alt="" srcset="">
+
+            <p>Alejando Valverde<br>Diseñador UX/UI</p>
+
+        </div>
+
+
+        <nav>
+            <a href="">
+                <img src="./../../../Components/Sidebar/resources/home icon.png">
+                <p>Inicio</p>
+            </a>
+            <a href="">
+                <img src="./../../../Components/Sidebar/resources/projects icon.png">
+                <p>Mis proyectos</p>
+            </a>
+            <a href="">
+                <img src="./../../../Components/Sidebar/resources/profile icon.png">
+                <p>Tu perfil</p>
+            </a>
+        </nav>
+
+        <footer class="sidebar__footer">
+            <img src="./../../../Components/Sidebar/resources/signout icon.png">
+            <p id="signOutButton">Cerrar sesión</p>
+        </footer>
+
+    </nav>
+    <main></main>
+
     <script type="module" src="./dashboard.js"></script>
 </body>
 
