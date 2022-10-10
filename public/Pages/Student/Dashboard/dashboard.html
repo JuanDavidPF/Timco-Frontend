@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./../../../Pages/LandingPage/variables.css">
     <link rel="stylesheet" href="././../../../Components/Sidebar/sidebar.css">
     <link rel="stylesheet" href="./../../../Components/ProjectCard/project_card.css">
-
+    <link rel="stylesheet" href="./../../../Components/ListCard/listCard.css">
     <link rel="stylesheet" href="./../../../Components/CTA_Button/cta-button.css">
     <script type="module" src="./../../../src/StudentLoggedVerifier.js"></script>
 </head>
@@ -29,7 +29,7 @@
 
 
         <nav>
-            <a href="">
+            <a class="selected" href="">
                 <img src="./../../../Components/Sidebar/resources/home icon.png">
                 <p>Inicio</p>
             </a>
@@ -53,14 +53,82 @@
         <h1>¡Hola, Alejandro!</h1>
         <p>Estas ofertas son las más afines de acuerdo a las habilidades que quieres desarrollar</p>
 
-        <h2>Vacantes disponibles </h2>
+        <h2>Vacantes disponibles</h2>
         <section id="dashboard__vacancies">
 
-
         </section>
+
+
+        <section class="dashboard_me">
+
+            <section class="dashboard_me__projects">
+                <h2>Mis proyectos</h2>
+
+                <div>
+                    <nav class="dashboard_me__projects__nav">
+                        <button class="selected">Activos</button>
+                        <button>Finalizados</button>
+                        <button>En espera</button>
+                    </nav>
+
+                    <div id="dashboard_me__projects__container">
+
+                        <article class="listCard">
+                            <img class="listCard__image"
+                                src="https://www.creavea.com/produits/82320-l/image-3d-divers-zen-n2-30-x-30-cm-l.jpg">
+
+                            <section class="listCard__information">
+                                <h2 class="listCard__information__title">Diseño de logo</h2>
+                                <div class="listCard__information__information">
+                                    <span> <img src="./../../../Components/ListCard/resources/company.png">
+                                        <p><small>Mc Donalds</small></p>
+                                    </span>
+                                    <span>
+                                        <img>
+                                        <p><small>$400.000</small></p>
+                                    </span>
+                                    <span>
+                                        <img>
+                                        <p><small>24 de feb 2022</small></p>
+                                    </span>
+
+                                </div>
+                            </section>
+
+                            <section class="listCard__controls">
+                                <button type="button" class="cta_button --accented">Entregar</button>
+                                <button type="button" class="cta_button">Ver brief</button>
+                            </section>
+
+                        </article>
+
+                    </div>
+                </div>
+
+            </section>
+            <section class=" dashboard_me__stats">
+                <h2>Tu progreso</h2>
+
+                <div>
+                    <div class="dashboard_me__stats__statCard">
+                        <h2>18</h2>
+                        <p>Proyectos<br>finalizados</p>
+                    </div>
+
+                    <div class="dashboard_me__stats__statCard">
+                        <h2>23 H</h2>
+                        <p>Tiempo<br>invertido</p>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+
+
     </main>
 
     <script type="module" src="./dashboard.js"></script>
+
 </body>
 
 </html>

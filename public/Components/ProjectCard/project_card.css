@@ -26,5 +26,6 @@
 }
 
 .projectCard button {
+    width: 100%;
     align-self: center;
 }

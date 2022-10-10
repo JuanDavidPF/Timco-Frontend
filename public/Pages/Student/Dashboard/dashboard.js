@@ -1,3 +1,4 @@
+import ListCard from "../../../Components/ListCard/ListCard.js";
 import ProjectCard from "../../../Components/ProjectCard/ProjectCard.js";
 import API from "./../../../src/TimcoApi.js"
 
@@ -8,8 +9,12 @@ document.getElementById("signOutButton").addEventListener('click', () => {
 })
 
 const vacancyContainer = document.querySelector("#dashboard__vacancies");
+const myProjectsContainer = document.querySelector("#dashboard_me__projects__container");
+
 
 const LoadVacancies = async () => {
+
+
     if (!vacancyContainer) return;
     vacancyContainer.innerHTML = null;
 
@@ -30,6 +35,25 @@ const LoadVacancies = async () => {
 
 }//Closes LoadVacancies method
 
+const LoadMyProjects = async () => {
+
+
+    if (!myProjectsContainer) return;
+    myProjectsContainer.innerHTML = null;
+
+    const projects = await API.GetProjects('pokemon');
+
+    if (!projects) return;
+
+    projects.forEach((project, index) => {
+        const card = ListCard.CreateProjectCard(project);
+        if (!card) return;
+        myProjectsContainer.appendChild(card);
+
+    });
+
+}//Closes LoadVacancies method
+
 
 
 
@@ -42,3 +66,4 @@ const SignOut = () => {
 
 
 LoadVacancies();
+LoadMyProjects();
