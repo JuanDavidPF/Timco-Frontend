@@ -14,10 +14,34 @@ const API = (() => {
     const toiletApi = "https://ptsv2.com/";
     const toiletID = "o6jno-1663906012";
     const postURL = `${toiletApi}/t/${toiletID}/post`
-
+    const getURL = `https://pokeapi.co/api/v2`
     const GoToDashboard = () => window.location.href = "./../Dashboard/dashboard.html";
     const GoToDetailsForm = () => window.location.href = "./../Details/details.html";
     const GoToLogin = () => window.location.href = "./../Login/login.html";
+
+
+    const GetProjects = async (key) => {
+        try {
+            const request = await fetch(`${getURL}/${key}`);
+
+            switch (request.status) {
+
+                case 200:
+                    const data = await request.json();
+                    return data.results;
+
+
+                default:
+                    alert("Hubo un problema, intentalo de nuevo en unos minutos");
+                    break;
+            }
+
+
+        } catch (error) {
+            alert("Hubo un problema, intentalo de nuevo en unos minutos");
+        }
+    }
+
 
 
     /////////////////////////////////////////////
@@ -270,6 +294,8 @@ const API = (() => {
     //Add all methods to make them public to other scripts
 
     return {
+        GetProjects,
+
         LoginStudent,
         SignUpStudent,
         UploadStudentDetails,
@@ -282,7 +308,6 @@ const API = (() => {
         SignOutRecruiter,
         UploadProject,
         IsRecruiterLogged,
-
     }
 
 })()

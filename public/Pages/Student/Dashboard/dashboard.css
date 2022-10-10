@@ -11,9 +11,19 @@ body {
 }
 
 main {
-    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
     width: 100%;
-    padding: 70px 94px;
-    background-color: red;
-    margin-left: var(--sideNavbarWidth);
+    padding: 70px var(--bodyPadding);
+    padding-left: calc(var(--bodyPadding) + var(--sideNavbarWidth));
+
+}
+
+#dashboard__vacancies {
+    flex-shrink: 0;
+    padding: 40px 0;
+    overflow-x: auto;
+    display: flex;
+    gap: 32px;
 }
