@@ -23,7 +23,7 @@ main {
 .overview__header {
 
     display: flex;
-    justify-content: space-around;
+    gap: 50px;
     padding: 32px 45px;
     border-radius: 14px;
     width: 100%;
@@ -32,10 +32,19 @@ main {
 }
 
 .overview__header__logo {
+
+    background-color: var(--ctaAccent);
+    border-radius: 50%;
     width: 180px;
+    height: 180px;
 }
 
 .overview__header__summary {
     display: flex;
+    gap: 10px;
     flex-direction: column;
+}
+
+.overview__header__projectType {
+    color: var(--darkerGray);
 }

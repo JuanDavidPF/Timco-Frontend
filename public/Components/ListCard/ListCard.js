@@ -5,7 +5,7 @@
 
 const ListCard = (() => {
 
-    const CreateProjectCard = ({ name = 'project name', owner = "project owner", logoUri = 'https://images.ctfassets.net/oggad6svuzkv/7znyJc3Y7SecEoKSYKWoaQ/4a24e9015c360799cfb072adcd92cc5e/P_G_Logo_RGB.svg', budget = 0, deadline = 3, projectTheme = '#F7863C' }, onClick = () => { alert("click") }) => {
+    const CreateProjectCard = ({ name = 'project name', owner = "project owner", logoUri = 'https://images.ctfassets.net/oggad6svuzkv/7znyJc3Y7SecEoKSYKWoaQ/4a24e9015c360799cfb072adcd92cc5e/P_G_Logo_RGB.svg', budget = 0, deadline = 3, projectTheme = '#F7863C' }, OnDeliver = () => { }, OnBrief = () => { }) => {
         const card = document.createElement("article");
 
         card.classList.add('listCard');
@@ -20,7 +20,7 @@ const ListCard = (() => {
         informationSection.classList.add('listCard__information');
         card.appendChild(informationSection);
 
-        const projectTitle = document.createElement('h2');
+        const projectTitle = document.createElement('h4');
         projectTitle.classList.add('listCard__information__title');
         projectTitle.textContent = name;
         informationSection.appendChild(projectTitle);
@@ -86,6 +86,8 @@ const ListCard = (() => {
         briefBtn.classList.add('cta_button');
         briefBtn.textContent = 'Ver brief';
         cardControls.append(briefBtn);
+
+        briefBtn.onclick = OnBrief;
 
 
         return card;

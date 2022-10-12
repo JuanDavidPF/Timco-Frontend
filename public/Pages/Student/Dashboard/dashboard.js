@@ -20,14 +20,15 @@ const LoadVacancies = async () => {
 
     const projects = await API.GetProjects('pokemon');
 
-    const OnVacancyClicked = (id) => {
-        alert(id);
+    const OnProjectClicked = (id) => {
+        window.location.href = `./../../Projects/overview.html?projectId=${id}`;
+
     }
 
     if (!projects) return;
 
     projects.forEach((project, index) => {
-        const card = ProjectCard.Create(project, () => OnVacancyClicked(index));
+        const card = ProjectCard.Create(project, () => OnProjectClicked(index + 1));
         if (!card) return;
         vacancyContainer.appendChild(card);
 
@@ -43,10 +44,15 @@ const LoadMyProjects = async () => {
 
     const projects = await API.GetProjects('pokemon');
 
+    const OnProjectClicked = (id) => {
+        window.location.href = `./../../Projects/overview.html?projectId=${id}`;
+    }
+
+
     if (!projects) return;
 
     projects.forEach((project, index) => {
-        const card = ListCard.CreateProjectCard(project);
+        const card = ListCard.CreateProjectCard(project, () => OnProjectClicked(index + 1), () => OnProjectClicked(index + 1));
         if (!card) return;
         myProjectsContainer.appendChild(card);
 

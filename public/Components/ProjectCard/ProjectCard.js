@@ -20,7 +20,7 @@ const ProjectCard = (() => {
         projectOwner.textContent = owner;
         card.append(projectOwner);
 
-        const projectName = document.createElement('h2');
+        const projectName = document.createElement('h5');
         projectName.classList.add('projectCard__title');
         projectName.textContent = name;
         card.append(projectName);
