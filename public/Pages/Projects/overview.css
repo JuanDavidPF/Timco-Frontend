@@ -1,0 +1,41 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    display: flex;
+    flex-direction: row;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    padding: 70px var(--bodyPadding);
+    padding-left: calc(var(--bodyPadding) + var(--sideNavbarWidth));
+    height: fit-content;
+}
+
+.overview__header {
+
+    display: flex;
+    justify-content: space-around;
+    padding: 32px 45px;
+    border-radius: 14px;
+    width: 100%;
+
+    background-color: white;
+}
+
+.overview__header__logo {
+    width: 180px;
+}
+
+.overview__header__summary {
+    display: flex;
+    flex-direction: column;
+}
