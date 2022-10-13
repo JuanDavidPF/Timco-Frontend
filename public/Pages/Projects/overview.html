@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="./../../Pages/LandingPage/variables.css">
     <link rel="stylesheet" href="./../../Components/Sidebar/sidebar.css">
+    <link rel="stylesheet" href="./../../Components/CTA_Button/cta-button.css">
     <link rel="stylesheet" href="./overview.css">
 </head>
 
@@ -67,18 +68,89 @@
                 <div>
                     <p><strong> <small>Valor del proyecto</small> </strong></p>
                     <span><img src="./resources/budget.png">
-                        <p><small>$400.000</small></p>
+                        <p><small class="overview__header__budget">$400.000</small></p>
                     </span>
                 </div>
                 <div>
                     <p><strong><small>Fecha de entrega</small></strong></p>
                     <span><img src="./resources/deadline.png">
-                        <p><small>24 de feb 2022</small></p>
+                        <p><small class="overview__header__deadline">24 de feb 2022</small></p>
                     </span>
                 </div>
             </div>
 
         </header>
+
+        <section class="overview">
+            <section class="overview__body">
+                <h5>Brief</h5>
+                <p class="overview__body__projectBrief">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+                    suscipit rem doloremque accusantium
+                    totam vitae voluptatibus repudiandae tenetur ex consequuntur labore eius ea, quod officia error,
+                    dolores
+                    beatae reprehenderit dolor. </p>
+
+                <div class="overview__divider"></div>
+
+                <h5>Entregables</h5>
+                <ul class="overview__body__projectsRequirements">
+                    <li>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                            Magnam laborum aperiam, amet soluta
+                            nihil id mollitia sit! Non, at quasi corporis cumque nesciunt placeat minima temporibus nemo
+                            maiores eligendi facere?</p>
+                    </li>
+                    <li>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam laborum aperiam, amet soluta
+                            nihil id mollitia sit! Non, at quasi corporis cumque nesciunt placeat minima temporibus nemo
+                            maiores eligendi facere?</p>
+                    </li>
+                    <li>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam laborum aperiam, amet soluta
+                            nihil id mollitia sit! Non, at quasi corporis cumque nesciunt placeat minima temporibus nemo
+                            maiores eligendi facere?</p>
+                    </li>
+                    <li>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magnam laborum aperiam, amet soluta
+                            nihil id mollitia sit! Non, at quasi corporis cumque nesciunt placeat minima temporibus nemo
+                            maiores eligendi facere?</p>
+                    </li>
+                </ul>
+
+                <div class="overview__divider"></div>
+
+                <h5>Habilidades requeridas</h5>
+                <div class="overview__body__skills">
+
+
+                </div>
+
+            </section>
+
+            <aside class="overview__attached">
+
+                <h6>Archivos</h6>
+                <p><small>El cliente ha adjuntado esta carpeta con todos los insumos necesarios para el desarrollo del
+                        proyecto</small></p>
+
+
+
+                <a href="#" class="overview__attached__button"><img src="./resources/files.png">
+                    <p><small>Descargar archivos</small></p>
+                </a>
+                <div class="overview__divider"></div>
+                <h6>Links</h6>
+                <a class="overview__attached__button overview_website"><img src="./resources/website.png">
+                    <p><small>Página web</small></p>
+                </a>
+                <a class="overview__attached__button overview_linkedin"><img src="./resources/linkedin.png">
+                    <p><small>Linkedin</small></p>
+                </a>
+                </span>
+
+                <button id="DeliverBtn" class="cta_button --accented">Entregar</button>
+            </aside>
+        </section>
     </main>
 
     <script type="module" src="./overview.js"></script>

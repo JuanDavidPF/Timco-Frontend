@@ -20,9 +20,20 @@ main {
     height: fit-content;
 }
 
+.overview {
+    display: flex;
+
+    gap: 20px;
+}
+
+.overview__divider {
+    border: 1px solid #E0E0E0;
+}
+
 .overview__header {
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     gap: 50px;
     padding: 32px 45px;
@@ -42,9 +53,12 @@ main {
 
 .overview__header__summary {
     display: flex;
+    flex: 1;
     gap: 10px;
     flex-direction: column;
 }
+
+
 
 .overview__header__details {
 
@@ -69,4 +83,46 @@ main {
 
 .overview__header__projectType {
     color: var(--darkerGray);
+}
+
+.overview__body {
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+    padding: 36px;
+    border-radius: 14px;
+    background-color: white;
+}
+
+.overview__body__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.overview__body__skill {
+    padding: 8px 13px;
+    width: fit-content;
+    background: #E0FE68;
+    border-radius: 18px;
+}
+
+.overview__attached {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 30px 20px;
+    height: fit-content;
+    width: 550px;
+    border-radius: 14px;
+    background-color: white;
+}
+
+.overview__attached__button {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: transparent;
+    border-style: none;
 }
