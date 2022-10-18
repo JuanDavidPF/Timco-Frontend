@@ -15,9 +15,15 @@ const API = (() => {
     const toiletID = "o6jno-1663906012";
     const postURL = `${toiletApi}/t/${toiletID}/post`
     const getURL = `https://pokeapi.co/api/v2`
-    const GoToDashboard = () => window.location.href = "./../Dashboard/dashboard.html";
-    const GoToDetailsForm = () => window.location.href = "./../Details/details.html";
-    const GoToLogin = () => window.location.href = "./../Login/login.html";
+
+    const GoToRecruiterDashboard = () => window.location.replace(`http://${window.location.host}/public/Pages/Recruiter/Dashboard/dashboard.html`);
+    const GoToStudentDashboard = () => window.location.replace(`http://${window.location.host}/public/Pages/Student/Dashboard/dashboard.html`);
+
+    const GoToRecruiterDetails = () => window.location.replace(`http://${window.location.host}/public/Pages/Recruiter/Details/details.html`);
+    const GoToStudentDetails = () => window.location.replace(`http://${window.location.host}/public/Pages/Student/Details/details.html`);
+
+    const GoToRecruiterLogin = () => window.location.replace(`http://${window.location.host}/public/Pages/Recruiter/Login/login.html`);
+    const GoToStudentLogin = () => window.location.replace(`http://${window.location.host}/public/Pages/Student/Login/login.html`);
 
 
     const GetProjects = async (key) => {
@@ -91,7 +97,8 @@ const API = (() => {
                     // Instead of storing student You should store whatever the server
                     // responds to a succesful login - it should contain user credentials
                     localStorage.setItem(loggedStudentKey, JSON.stringify(student));
-                    GoToDashboard();
+
+                    GoToStudentDashboard();
                     break;
 
                 case 404:
@@ -123,7 +130,7 @@ const API = (() => {
                     // responds to a succesful login - it should contain user credentials
 
                     localStorage.setItem(loggedStudentKey, JSON.stringify(student));
-                    GoToDetailsForm();
+                    GoToStudentDetails();
                     break;
 
                 case 404:
@@ -155,7 +162,7 @@ const API = (() => {
                     // Instead of storing student You should store whatever the server
                     // responds to a succesful login - it should contain user credentials
 
-                    GoToDashboard();
+                    GoToStudentDashboard();
                     break;
 
                 case 404:
@@ -173,7 +180,7 @@ const API = (() => {
 
     const SignOutStudent = () => {
         localStorage.setItem(loggedStudentKey, "");
-        GoToLogin();
+        GoToStudentLogin();
         return
     }//Closes SignOutStudent method
 
@@ -201,7 +208,7 @@ const API = (() => {
                     // responds to a succesful login - it should contain user credentials
 
                     localStorage.setItem(loggedRecruiterKey, JSON.stringify(recruiter));
-                    GoToDashboard();
+                    GoToRecruiterDashboard();
                     break;
 
                 case 404:
@@ -233,7 +240,7 @@ const API = (() => {
                     // responds to a succesful login - it should contain user credentials
 
                     localStorage.setItem(loggedRecruiterKey, JSON.stringify(recruiter));
-                    GoToDetailsForm();
+                    GoToRecruiterDetails();
                     break;
 
                 case 404:
@@ -250,8 +257,8 @@ const API = (() => {
 
     const SignOutRecruiter = () => {
         localStorage.setItem(loggedRecruiterKey, "");
-        GoToLogin();
-
+        GoToRecruiterLogin();
+        return
     }//Closes SignOutStudent method
 
     const UploadRecruiterDetails = async (details) => {
@@ -270,7 +277,7 @@ const API = (() => {
                     // Instead of storing student You should store whatever the server
                     // responds to a succesful login - it should contain user credentials
 
-                    GoToDashboard();
+                    GoToRecruiterDashboard();
                     break;
 
                 case 404:

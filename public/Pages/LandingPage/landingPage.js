@@ -16,6 +16,7 @@ if (landingRegisterRecruiterForm) landingRegisterRecruiterForm.addEventListener(
         password: e.target[3].value,
     }
 
+
     API.SignUpRecruiter(newRecruiter);
 
 });

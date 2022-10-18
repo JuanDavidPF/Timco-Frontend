@@ -51,7 +51,7 @@ const LoadVacancies = async () => {
 
 const SignOut = () => {
 
-    API.SignOutStudent();
+    API.SignOutRecruiter();
 
 }
 
