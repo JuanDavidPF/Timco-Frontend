@@ -38,18 +38,19 @@
                 </label>
                 <input required="true" id="recruiterName" placeholder="Nombre completo">
             </div>
-
+<!-- 
             <div class="textInput">
                 <label for="companyName">
                     <p>Nombre de empresa*</p>
                 </label>
                 <input required="true" id="companyName" placeholder="Nombre de empresa">
-            </div>
+            </div> -->
 
 
             <div class="textInput">
-                <label for="recruiterEmail">
-                    <p>Email*</p>
+                <label for="recruiterEmail" style="display: flex;">
+                    <p id="create-recruiter-email-label">Email*</p>
+                    
                 </label>
                 <input required="true" type="email" id="recruiterEmail" placeholder="Email">
             </div>
@@ -61,7 +62,7 @@
                 <input minlength="6" autocomplete="current-password" required="true" type="password"
                     id="recruiterPassword" placeholder="Contraseña">
             </div>
-
+            <p style="display: none; margin-left: 8px;" id="email-exists-err">El email ya está registrado</p>
             <button type="submit" class="cta_button --accented">Iniciar sesión</button>
             <div class="separator"></div>
             <p>¿Ya tienes una cuenta? <a href="./../Login/login.html">Ingresa</a></p>

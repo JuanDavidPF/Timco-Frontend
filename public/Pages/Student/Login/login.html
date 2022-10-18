@@ -38,19 +38,19 @@
 
             <div class="textInput">
                 <label for="studentEmail">
-                    <p>Email*</p>
+                    <p id="login-student-email-label">Email*</p>
                 </label>
                 <input required="true" type="email" id="studentEmail" placeholder="Email">
             </div>
 
             <div class="textInput">
                 <label for="studentPassword">
-                    <p>Contraseña*</p>
+                    <p id="login-student-password-label">Contraseña*</p>
                 </label>
                 <input autocomplete="current-password" required="true" type="password" id="studentPassword"
                     placeholder="Contraseña">
             </div>
-
+            <p style="display: none; margin-left: 8px;" id="email-password-error">Email o constraseña equivocada</p>
             <button type="submit" class="cta_button --accented">Iniciar sesión</button>
             <div class="separator"></div>
             <p>¿Aún no tienes una cuenta? <a href="./../SignUp/signUp.html">Regístrate</a></p>
