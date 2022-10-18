@@ -1,9 +1,11 @@
 import API from "../../src/TimcoApi.js";
 
 const urlParams = new URLSearchParams(window.location.search);
+
+
 const projectKey = urlParams.get('projectId');
 const owned = !!urlParams.get('owned');
-
+const usertype = !!urlParams.get('user');
 
 const ProjectLogo = document.querySelector('.overview__header__logo');
 const ProjectName = document.querySelector('.overview__header__projectName');
@@ -19,9 +21,105 @@ const ProjectSkills = document.querySelector('.overview__body__skills');
 
 const WebsiteButton = document.querySelector('.overview_website');
 const LinkedInButton = document.querySelector('.overview_linkedin');
-const DeliverButton = document.querySelector('#DeliverBtn');
 
-if (DeliverButton) DeliverButton.style.display = owned ? 'block' : 'none'
+const DeliverButton = document.querySelector('#DeliverBtn');
+const ApplyButton = document.querySelector('#ApplyBtn');
+
+const DeliverModal = document.querySelector('#DeliverModal');
+const ApplyModal = document.querySelector('#ApplyModal');
+
+
+if (DeliverButton) {
+    if (!owned) {
+        DeliverButton.remove();
+        if (DeliverModal) DeliverModal.remove();
+    } else {
+
+        DeliverButton.addEventListener('click', () => {
+            DeliverModal.classList.remove('hidden');
+        })
+    }
+}
+
+if (ApplyButton) {
+    if (owned) {
+        ApplyButton.remove();
+        if (ApplyModal) ApplyModal.remove();
+
+    } else {
+
+        ApplyButton.addEventListener('click', () => {
+            ApplyModal.classList.remove('hidden');
+
+        })
+
+    }
+}
+
+if (DeliverModal) {
+
+    DeliverModal.querySelector('.cancelBtn').addEventListener('click', () => {
+        DeliverModal.classList.add('hidden');
+    })
+
+    DeliverModal.querySelector('.closeModal__btn').addEventListener('click', () => {
+        DeliverModal.classList.add('hidden');
+    })
+
+    DeliverModal.addEventListener('click', (event) => {
+        if (event.target != DeliverModal) return;
+
+        DeliverModal.classList.add('hidden');
+    })
+
+
+    DeliverModal.querySelector('form').addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const Submission = {};
+
+        [...e.target.elements].forEach((element, index) => Submission[element.name] = element.value)
+        if (await API.SubmitProject(Submission)) {
+            alert("Proyecto entregado exitosamente");
+            window.location.reload();
+        }
+    })
+
+}
+if (ApplyModal) {
+
+
+    ApplyModal.querySelector('.cancelBtn').addEventListener('click', () => {
+        ApplyModal.classList.add('hidden');
+    })
+
+
+    ApplyModal.querySelector('.closeModal__btn').addEventListener('click', () => {
+        ApplyModal.classList.add('hidden');
+    })
+
+    ApplyModal.addEventListener('click', (event) => {
+        if (event.target != ApplyModal) return;
+        ApplyModal.classList.add('hidden');
+
+    })
+
+    ApplyModal.querySelector('form').addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const Request = {};
+
+        [...e.target.elements].forEach((element, index) => Request[element.name] = element.value)
+        if (await API.JoinProjectRequest(Request)) {
+            alert("Petición enviada exitosamente");
+            window.location.reload();
+        }
+    })
+
+}
+
+
+
 const RenderProjectData = async (key) => {
 
     if (!key) return;
@@ -30,7 +128,7 @@ const RenderProjectData = async (key) => {
 }
 
 const FillInformation = (projectData) => {
-    console.log(projectData);
+
     if (!projectData) return;
 
     if (ProjectLogo) ProjectLogo.src = projectData.sprites.front_default;

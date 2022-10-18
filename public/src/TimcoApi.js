@@ -178,6 +178,66 @@ const API = (() => {
 
     }//Closes UploadStudentDetails method
 
+    const SubmitProject = async (project) => {
+        try {
+
+            const request = await
+                fetch(postURL, {
+                    method: 'POST',
+                    body: JSON.stringify(project)
+                });
+
+            switch (request.status) {
+
+                case 200:
+
+                    // Instead of storing student You should store whatever the server
+                    // responds to a succesful login - it should contain user credentials
+
+                    return true;
+                    break;
+
+                case 404:
+                    console.log(request)
+                    alert("La petición no dió resultado");
+                    break;
+            }
+        } catch (error) {
+
+            alert("Hubo un problema, intentalo de nuevo en unos minutos");
+        }
+    }
+
+    const JoinProjectRequest = async (student) => {
+        try {
+
+            const request = await
+                fetch(postURL, {
+                    method: 'POST',
+                    body: JSON.stringify(student)
+                });
+
+            switch (request.status) {
+
+                case 200:
+
+                    // Instead of storing student You should store whatever the server
+                    // responds to a succesful login - it should contain user credentials
+
+                    return true;
+                    break;
+
+                case 404:
+                    console.log(request)
+                    alert("La petición no dió resultado");
+                    break;
+            }
+        } catch (error) {
+
+            alert("Hubo un problema, intentalo de nuevo en unos minutos");
+        }
+    }
+
     const SignOutStudent = () => {
         localStorage.setItem(loggedStudentKey, "");
         GoToStudentLogin();
@@ -339,6 +399,8 @@ const API = (() => {
         GoToStudentDashboard,
         GoToStudentDetails,
         GoToStudentLogin,
+        SubmitProject,
+        JoinProjectRequest,
 
         LogInRecruiter,
         SignUpRecruiter,
