@@ -336,6 +336,9 @@ const API = (() => {
         UploadStudentDetails,
         SignOutStudent,
         IsStudentLogged,
+        GoToStudentDashboard,
+        GoToStudentDetails,
+        GoToStudentLogin,
 
         LogInRecruiter,
         SignUpRecruiter,
@@ -343,6 +346,9 @@ const API = (() => {
         SignOutRecruiter,
         UploadProject,
         IsRecruiterLogged,
+        GoToRecruiterDashboard,
+        GoToRecruiterDetails,
+        GoToRecruiterLogin
     }
 
 })()
