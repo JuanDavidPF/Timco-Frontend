@@ -29,3 +29,18 @@
     width: 100%;
     align-self: center;
 }
+
+a {
+    text-decoration: none;
+}
+
+.projectCard.new {
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 2px dashed #132644;
+    filter: drop-shadow(0px -11px 45px rgba(22, 22, 22, 0.1));
+    border-radius: 14px;
+}

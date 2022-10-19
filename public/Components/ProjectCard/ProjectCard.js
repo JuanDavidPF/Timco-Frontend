@@ -5,7 +5,9 @@
 
 const ProjectCard = (() => {
 
-    const Create = ({ name = 'project name', owner = "project owner", logoUri = 'https://images.ctfassets.net/oggad6svuzkv/7znyJc3Y7SecEoKSYKWoaQ/4a24e9015c360799cfb072adcd92cc5e/P_G_Logo_RGB.svg', budget = 0, deadline = 3, projectTheme = '#F7863C' }, onClick = () => { alert("click") }) => {
+    const Create = ({ name = 'project name', owner = "project owner", logoUri = 'https://images.ctfassets.net/oggad6svuzkv/7znyJc3Y7SecEoKSYKWoaQ/4a24e9015c360799cfb072adcd92cc5e/P_G_Logo_RGB.svg', budget = 0, deadline = 3, projectTheme = '#F7863C' },
+        onClick = () => { alert("click") },
+        buttonLabel = 'Aplicar') => {
         const card = document.createElement("article");
         card.style.backgroundColor = projectTheme;
         card.classList.add('projectCard');
@@ -53,7 +55,7 @@ const ProjectCard = (() => {
         ctaButton.onclick = onClick;
         ctaButton.type = 'button'
         ctaButton.classList.add('cta_button');
-        ctaButton.textContent = 'Aplicar';
+        ctaButton.textContent = buttonLabel;
         card.append(ctaButton);
 
         return card;
