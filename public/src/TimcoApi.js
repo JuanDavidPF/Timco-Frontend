@@ -12,11 +12,15 @@ const API = (() => {
   //const toiletID = "o6jno-1663906012";
   const postURL = `${toiletApi}/api/v1`;
   const getURL = `https://pokeapi.co/api/v2`;
-  const GoToDashboard = () =>
-    (window.location.href = "./../Dashboard/dashboard.html");
-  const GoToDetailsForm = () =>
-    (window.location.href = "./../Details/details.html");
-  const GoToLogin = () => (window.location.href = "./../Login/login.html");
+
+  const GoToRecruiterDashboard = () => window.location.replace(`http://${window.location.host}/public/Pages/Recruiter/Dashboard/dashboard.html`);
+  const GoToStudentDashboard = () => window.location.replace(`http://${window.location.host}/public/Pages/Student/Dashboard/dashboard.html`);
+
+  const GoToRecruiterDetails = () => window.location.replace(`http://${window.location.host}/public/Pages/Recruiter/Details/details.html`);
+  const GoToStudentDetails = () => window.location.replace(`http://${window.location.host}/public/Pages/Student/Details/details.html`);
+
+  const GoToRecruiterLogin = () => window.location.replace(`http://${window.location.host}/public/Pages/Recruiter/Login/login.html`);
+  const GoToStudentLogin = () => window.location.replace(`http://${window.location.host}/public/Pages/Student/Login/login.html`);
 
   /////////////////////////////////////////////
   /////////Student methods
@@ -32,7 +36,7 @@ const API = (() => {
     const response = await request.json();
     if (response.error) return response.error;
     localStorage.setItem(loggedStudentKey, JSON.stringify(student));
-    GoToDashboard();
+    GoToStudentDashboard();
   };
 
   //Closes SignUpStudent method
@@ -47,7 +51,7 @@ const API = (() => {
     if (response.error) return response.error;
 
     localStorage.setItem(loggedStudentKey, JSON.stringify(student));
-    GoToDetailsForm();
+    GoToStudentDetails();
   };
   //Closes SignUpRecruiter method
 
@@ -63,7 +67,7 @@ const API = (() => {
           // Instead of storing student You should store whatever the server
           // responds to a succesful login - it should contain user credentials
 
-          GoToDashboard();
+          GoToStudentDashboard();
           break;
 
         case 404:
@@ -82,7 +86,7 @@ const API = (() => {
 
   const SignOutStudent = () => {
     localStorage.setItem(loggedStudentKey, "");
-    GoToLogin();
+    GoToStudentLogin();
     return;
   }; //Closes SignOutStudent method
 
@@ -101,7 +105,7 @@ const API = (() => {
     if (response.error) return response.error;
 
     localStorage.setItem(loggedRecruiterKey, JSON.stringify(recruiter));
-    GoToDetailsForm();
+    GoToRecruiterDetails();
   }; //Closes SignUpRecruiter method
 
   //Open login recruiter
@@ -117,7 +121,7 @@ const API = (() => {
       const response = await request.json();
     if (response.error) return response.error;
     localStorage.setItem(loggedRecruiterKey, JSON.stringify(recruiter));
-    GoToDashboard();
+    GoToRecruiterDashboard();
       
     
   };
@@ -135,7 +139,7 @@ const API = (() => {
           // Instead of storing student You should store whatever the server
           // responds to a succesful login - it should contain user credentials
 
-          GoToDashboard();
+          GoToRecruiterDashboard();
           break;
 
         case 404:
@@ -151,7 +155,7 @@ const API = (() => {
 
   const SignOutRecruiter = () => {
     localStorage.setItem(loggedRecruiterKey, "");
-    GoToLogin();
+    GoToRecruiterLogin();
   }; //Closes SignOutStudent method
 
   const IsRecruiterLogged = () => {
@@ -180,6 +184,7 @@ const API = (() => {
     }
   };
 
+
   const GetProjectByID = async (projectID) => {
     try {
       const request = await fetch(`${getURL}/pokemon/${projectID}`);
@@ -201,6 +206,66 @@ const API = (() => {
       alert("Hubo un problema, intentalo de nuevo en unos minutos");
     }
   };
+
+  const SubmitProject = async (project) => {
+    try {
+
+        const request = await
+            fetch(postURL, {
+                method: 'POST',
+                body: JSON.stringify(project)
+            });
+
+        switch (request.status) {
+
+            case 200:
+
+                // Instead of storing student You should store whatever the server
+                // responds to a succesful login - it should contain user credentials
+
+                return true;
+                break;
+
+            case 404:
+                console.log(request)
+                alert("La petición no dió resultado");
+                break;
+        }
+    } catch (error) {
+
+        alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+}
+
+const JoinProjectRequest = async (student) => {
+    try {
+
+        const request = await
+            fetch(postURL, {
+                method: 'POST',
+                body: JSON.stringify(student)
+            });
+
+        switch (request.status) {
+
+            case 200:
+
+                // Instead of storing student You should store whatever the server
+                // responds to a succesful login - it should contain user credentials
+
+                return true;
+                break;
+
+            case 404:
+                console.log(request)
+                alert("La petición no dió resultado");
+                break;
+        }
+    } catch (error) {
+
+        alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+}
 
   const UploadProject = async (project) => {
     try {
@@ -227,20 +292,28 @@ const API = (() => {
 
   return {
     GetProjects,
-    GetProjectByID,
+        GetProjectByID,
 
-    LoginStudent,
-    SignUpStudent,
-    UploadStudentDetails,
-    SignOutStudent,
-    IsStudentLogged,
+        LoginStudent,
+        SignUpStudent,
+        UploadStudentDetails,
+        SignOutStudent,
+        IsStudentLogged,
+        GoToStudentDashboard,
+        GoToStudentDetails,
+        GoToStudentLogin,
+        SubmitProject,
+        JoinProjectRequest,
 
-    LogInRecruiter,
-    SignUpRecruiter,
-    UploadRecruiterDetails,
-    SignOutRecruiter,
-    UploadProject,
-    IsRecruiterLogged,
+        LogInRecruiter,
+        SignUpRecruiter,
+        UploadRecruiterDetails,
+        SignOutRecruiter,
+        UploadProject,
+        IsRecruiterLogged,
+        GoToRecruiterDashboard,
+        GoToRecruiterDetails,
+        GoToRecruiterLogin
   };
 })();
 
