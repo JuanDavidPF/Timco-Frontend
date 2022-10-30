@@ -223,6 +223,29 @@ const API = (() => {
     }
   };
 
+  const GetProfileByID = async (profileID) => {
+    try {
+      const request = await fetch(`${getURL}/pokemon/${profileID}`);
+
+      switch (request.status) {
+        case 200:
+          const data = await request.json();
+          data.pokedex = await fetch(`${getURL}/pokemon-species/${profileID}`);
+          data.pokedex = await data.pokedex.json();
+          data.pokedex = data.pokedex.flavor_text_entries[20].flavor_text;
+
+          return data;
+
+        default:
+          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
+
+
   const SubmitProject = async (project) => {
     try {
 
@@ -315,6 +338,7 @@ const API = (() => {
   return {
     GetProjects,
     GetProjectByID,
+    GetProfileByID,
 
     LoginStudent,
     SignUpStudent,
