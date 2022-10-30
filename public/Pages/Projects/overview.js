@@ -1,3 +1,4 @@
+import ListCard from "../../Components/ListCard/ListCard.js";
 import API from "../../src/TimcoApi.js";
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -5,7 +6,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
 const projectKey = urlParams.get('projectId');
 const owned = !!urlParams.get('owned');
-const usertype = !!urlParams.get('user');
+const usertype = urlParams.get('user');
 
 const ProjectLogo = document.querySelector('.overview__header__logo');
 const ProjectName = document.querySelector('.overview__header__projectName');
@@ -27,6 +28,22 @@ const ApplyButton = document.querySelector('#ApplyBtn');
 
 const DeliverModal = document.querySelector('#DeliverModal');
 const ApplyModal = document.querySelector('#ApplyModal');
+
+
+const candidatesTitle = document.querySelector("#overview__candidates__title");
+const candidatesContainer = document.querySelector("#overview__candidates__container");
+
+
+if (usertype != "recruiter") {
+    if (candidatesTitle) candidatesTitle.remove();
+    if (candidatesContainer) candidatesContainer.remove();
+
+
+} else {
+    if (DeliverButton) DeliverButton.remove();
+    if (ApplyButton) ApplyButton.remove();
+}
+
 
 
 if (DeliverButton) {
@@ -165,6 +182,30 @@ const FillInformation = (projectData) => {
         }
 
     }
+
+
+    if (candidatesContainer) {
+
+        for (let i = 0; i < projectData.moves.length; i++) {
+
+            const card = ListCard.CreateProjectCard({
+                project: {
+                    name: projectData.moves[i].move.name,
+                    logoUri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${i + 1}.png`
+                }, primaryBtn: {
+                    label: 'Aceptar',
+                    onclick: () => { }
+                },
+                secondaryBtn: {
+                    label: 'Rechazar',
+                    onclick: () => { }
+                }
+            });
+
+            candidatesContainer.appendChild(card);
+        }
+    }
+
 
     if (WebsiteButton) WebsiteButton.href = projectData.species.url;
     if (LinkedInButton) LinkedInButton.href = projectData.location_area_encounters;

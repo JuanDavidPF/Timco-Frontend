@@ -28,7 +28,15 @@ const LoadVacancies = async () => {
     if (!projects) return;
 
     projects.forEach((project, index) => {
-        const card = ProjectCard.Create(project, () => OnProjectClicked(index + 1));
+        const card = ProjectCard.Create(
+            {
+                project: project,
+                primaryBtn: {
+                    label: 'Revisar',
+                    onclick: () => OnProjectClicked(index + 1)
+                }
+            });
+
         if (!card) return;
         vacancyContainer.appendChild(card);
 
@@ -45,7 +53,7 @@ const LoadMyProjects = async () => {
     const projects = await API.GetProjects('pokemon');
 
     const OnProjectClicked = (id) => {
-        window.location.href = `./../../Projects/overview.html?projectId=${id}&owned=true`;
+        API.GoTo(`Projects/overview.html?projectId=${id}&owned=true&user=student`)
     }
 
 
