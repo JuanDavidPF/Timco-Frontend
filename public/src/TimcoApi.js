@@ -2,7 +2,7 @@
 const API = (() => {
 
   //In the production branch use the githuburl/reponame link.
-  const StaticHost = 'http://127.0.0.1:5500';
+  const StaticHost = 'https://juandavidpf.github.io/Timco-Frontend';
 
 
   //Keys to store logged data in cache
