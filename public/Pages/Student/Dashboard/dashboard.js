@@ -21,8 +21,7 @@ const LoadVacancies = async () => {
     const projects = await API.GetProjects('pokemon');
 
     const OnProjectClicked = (id) => {
-        window.location.href = `./../../Projects/overview.html?projectId=${id}`;
-
+        API.GoTo(`Pages/Projects/overview.html?projectId=${id}`)
     }
 
     if (!projects) return;
