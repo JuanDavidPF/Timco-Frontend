@@ -29,9 +29,11 @@ const ApplyButton = document.querySelector('#ApplyBtn');
 const DeliverModal = document.querySelector('#DeliverModal');
 const ApplyModal = document.querySelector('#ApplyModal');
 
-
 const candidatesTitle = document.querySelector("#overview__candidates__title");
 const candidatesContainer = document.querySelector("#overview__candidates__container");
+
+const navButtons = document.querySelectorAll('.navButton');
+const mainSections = document.querySelectorAll('.mainSection');
 
 
 if (usertype != "recruiter") {
@@ -43,7 +45,6 @@ if (usertype != "recruiter") {
     if (DeliverButton) DeliverButton.remove();
     if (ApplyButton) ApplyButton.remove();
 }
-
 
 
 if (DeliverButton) {
@@ -103,6 +104,7 @@ if (DeliverModal) {
     })
 
 }
+
 if (ApplyModal) {
 
 
@@ -134,8 +136,6 @@ if (ApplyModal) {
     })
 
 }
-
-
 
 const RenderProfileData = async (key) => {
 
@@ -207,10 +207,34 @@ const FillInformation = (profileData) => {
         }
     }
 
-
     if (WebsiteButton) WebsiteButton.href = profileData.species.url;
     if (LinkedInButton) LinkedInButton.href = profileData.location_area_encounters;
 
 }
 
 RenderProfileData(profileId);
+
+
+navButtons.forEach((btn, index) => {
+    console.log(btn);
+    btn.addEventListener('click', () => {
+
+        SetMainSection(index);
+
+    })
+})
+
+
+const SetMainSection = (index) => {
+
+    navButtons.forEach(btn => {
+        btn.classList.remove("selected");
+    })
+
+    mainSections.forEach(section => {
+        section.classList.add("hidden");
+    })
+
+    navButtons[index].classList.add('selected');
+    mainSections[index].classList.remove('hidden');
+}
