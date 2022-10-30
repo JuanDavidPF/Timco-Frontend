@@ -27,7 +27,7 @@ const LoadVacancies = async () => {
     const projects = await API.GetProjects('pokemon');
 
     const OnProjectClicked = (id) => {
-        API.GoTo(`Projects/overview.html?projectId=${id}&user=recruiter`)
+        API.GoTo(`Pages/Projects/overview.html?projectId=${id}&user=recruiter`)
 
     }
 
