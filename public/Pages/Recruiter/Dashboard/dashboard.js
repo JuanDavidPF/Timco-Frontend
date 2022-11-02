@@ -1,6 +1,7 @@
 import ListCard from "../../../Components/ListCard/ListCard.js";
 import ProjectCard from "../../../Components/ProjectCard/ProjectCard.js";
 import API from "./../../../src/TimcoApi.js"
+import codedecJwt from "./../../../src/utils/parseJWT.js";
 
 
 document.getElementById("signOutButton").addEventListener('click', () => {
@@ -11,6 +12,33 @@ document.getElementById("signOutButton").addEventListener('click', () => {
 const vacancyContainer = document.querySelector("#dashboard__vacancies");
 const myProjectsContainer = document.querySelector("#dashboard_me__projects__container");
 
+const getUserData = () => {
+    const token = localStorage.getItem('token');
+    const userData = codedecJwt(token);
+    let userName = userData.data.name;
+    let userDetail;
+
+    if(API.IsRecruiterLogged){
+
+       userDetail = userData.data.companyName;
+    }else{
+        userDetail = userData.data.area.name;
+    }
+    //projectKey.value = userName;
+    
+
+    const userNameSideBar = document.getElementById("userName");
+    const userDetailSideBar= document.getElementById("userDetail");
+    const helloUserNameTitle = document.getElementById("helloUserName");
+
+    console.log(userNameSideBar.innerHTML);
+    console.log(userDetailSideBar);
+
+    userNameSideBar.innerHTML = userName;
+    helloUserNameTitle.innerHTML = userName;
+    userDetailSideBar.innerHTML=userDetail;
+
+}
 
 const LoadVacancies = async () => {
 
@@ -57,3 +85,4 @@ const SignOut = () => {
 
 
 LoadVacancies();
+getUserData();

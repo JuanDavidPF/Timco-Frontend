@@ -5,7 +5,15 @@
 
 const ListCard = (() => {
 
-    const CreateProjectCard = ({ name = 'project name', owner = "project owner", logoUri = 'https://images.ctfassets.net/oggad6svuzkv/7znyJc3Y7SecEoKSYKWoaQ/4a24e9015c360799cfb072adcd92cc5e/P_G_Logo_RGB.svg', budget = 0, deadline = 3, projectTheme = '#F7863C' }, OnDeliver = () => { }, OnBrief = () => { }) => {
+    const CreateProjectCard = ({
+        name = 'project name',
+        description = 'project description',
+        company = { name: 'company name' },
+        logoUri = 'https://images.ctfassets.net/oggad6svuzkv/7znyJc3Y7SecEoKSYKWoaQ/4a24e9015c360799cfb072adcd92cc5e/P_G_Logo_RGB.svg', 
+        priceTotal = 0,
+        timelineDate = 3,
+        projectTheme = '#F7863C' 
+    }, OnDeliver = () => { }, OnBrief = () => { }) => {
         const card = document.createElement("article");
 
         card.classList.add('listCard');
@@ -37,7 +45,8 @@ const ListCard = (() => {
         projectDetails.append(companySpan);
 
         const companyName = document.createElement('small');
-        companyName.textContent = owner;
+        // companyName.textContent = owner;
+        companyName.textContent = company.name;
         companySpan.appendChild(document.createElement('p')).appendChild(companyName);
 
 
@@ -50,7 +59,8 @@ const ListCard = (() => {
 
 
         const budgetAmount = document.createElement('small');
-        budgetAmount.textContent = budget;
+        budgetAmount.textContent = priceTotal;
+        // budgetAmount.textContent = budget;
         budgetSpan.appendChild(document.createElement('p')).appendChild(budgetAmount);
 
 
@@ -63,7 +73,8 @@ const ListCard = (() => {
 
 
         const deadlineTime = document.createElement('small');
-        deadlineTime.textContent = deadline + ' Semanas';
+        // deadlineTime.textContent = deadline + ' Semanas';
+        deadlineTime.textContent = timelineDate;
         deadlineSpan.appendChild(document.createElement('p')).appendChild(deadlineTime);
 
 

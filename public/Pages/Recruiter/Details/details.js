@@ -10,20 +10,25 @@ const screens = [];
 
 
 
+
+
 const projectNameHTML = document.querySelector("#summary_projectName");
 const projectBudgetHTML = document.querySelector("#summary_projectBudget");
 const projectDeadlineHTML = document.querySelector("#summary_projectDeadline");
 
 
 document.querySelectorAll(".top__tab__navbar>button").forEach((button, key) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
         SetCurrentScreen(key);
+        let dataCurrentUser = await API.loadCurrentUserData();
+        console.log(dataCurrentUser.data);
     })
 })
 
 
 
 document.querySelectorAll(".details").forEach((screen, key) => {
+    console.log("Details",screen, key);
     screens.push(screen)
     form[key] = [];
 
@@ -113,7 +118,10 @@ window.PreviousSection = () => {
 }
 
 const FinishForm = async () => {
-    await API.UploadProject(project);
+    console.log("Recruiter Details",details);
+    console.log(project)
+    API.GoToRecruiterDashboard();
+    await API.SubmitProject(project);
     API.UploadRecruiterDetails(details);
 }
 

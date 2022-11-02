@@ -22,8 +22,8 @@
         <div class="sidebar__header">
             <img src="./../../../Components/Sidebar/resources/logo.png" alt="" srcset="">
             <img src="./../../../Components/Sidebar/resources/profilePicture.png" alt="" srcset="">
-
-            <p>Alejando Valverde<br>Diseñador UX/UI</p>
+            <p id="userName">Alejandro Valverde</p>
+            <p id="userDetail"> Diseño UX/UI</p>
 
         </div>
 
@@ -50,7 +50,7 @@
 
     </nav>
     <main>
-        <h1>¡Hola, Alejandro!</h1>
+        <h1>¡Hola, <span id="helloUserName">Alejandro!</span>!</h1>
         <p>Estas ofertas son las más afines de acuerdo a las habilidades que quieres desarrollar</p>
 
         <h5>Vacantes disponibles</h5>
@@ -66,9 +66,9 @@
 
                 <div>
                     <nav class="dashboard_me__projects__nav">
-                        <button class="selected">Activos</button>
-                        <button>Finalizados</button>
-                        <button>En espera</button>
+                        <button id="active-tab" value="active">Activos</button>
+                        <button id="finished-tab" value = "finished">Finalizados</button>
+                        <button id="waiting-tab" value = "Waiting">En espera</button>
                     </nav>
 
                     <div id="dashboard_me__projects__container">
