@@ -57,11 +57,37 @@ const LoadVacancies = async () => {
 
   const projects = await API.GetProjects("pokemon");
 
+<<<<<<< HEAD
   const OnProjectClicked = (id) => {
     window.location.href = `./../../Projects/overview.html?projectId=${id}`;
   };
 
   if (!projects) return;
+=======
+    if (!vacancyContainer) return;
+    vacancyContainer.innerHTML = null;
+
+    const projects = await API.GetProjects('pokemon');
+
+    const OnProjectClicked = (id) => {
+        API.GoTo(`Pages/Projects/overview.html?projectId=${id}`)
+    }
+
+    if (!projects) return;
+
+    projects.forEach((project, index) => {
+        const card = ProjectCard.Create(
+            {
+                project: project,
+                primaryBtn: {
+                    label: 'Revisar',
+                    onclick: () => OnProjectClicked(index + 1)
+                }
+            });
+
+        if (!card) return;
+        vacancyContainer.appendChild(card);
+>>>>>>> ChangeRoutes
 
   projects.forEach((project, index) => {
     const card = ProjectCard.Create(project, () => OnProjectClicked(index + 1));
@@ -71,6 +97,7 @@ const LoadVacancies = async () => {
 }; //Closes LoadVacancies method
 
 const LoadMyProjects = async () => {
+<<<<<<< HEAD
   if (!myProjectsContainer) return;
   myProjectsContainer.innerHTML = null;
 
@@ -122,6 +149,34 @@ const OnProjectClicked = (id) => {
   debugger;
   window.location.href = `./../../Projects/overview.html?projectId=${id}&owned=true`;
 };
+=======
+
+
+    if (!myProjectsContainer) return;
+    myProjectsContainer.innerHTML = null;
+
+    const projects = await API.GetProjects('pokemon');
+
+    const OnProjectClicked = (id) => {
+        API.GoTo(`Projects/overview.html?projectId=${id}&owned=true&user=student`)
+    }
+
+
+    if (!projects) return;
+
+    projects.forEach((project, index) => {
+        const card = ListCard.CreateProjectCard(project, () => OnProjectClicked(index + 1), () => OnProjectClicked(index + 1));
+        if (!card) return;
+        myProjectsContainer.appendChild(card);
+
+    });
+
+}//Closes LoadVacancies method
+
+
+
+
+>>>>>>> ChangeRoutes
 
 const SignOut = () => {
   API.SignOutStudent();

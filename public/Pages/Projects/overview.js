@@ -1,3 +1,4 @@
+import ListCard from "../../Components/ListCard/ListCard.js";
 import API from "../../src/TimcoApi.js";
 // import codedecJwt from "../../src/utils/parseJWT";
 
@@ -8,12 +9,18 @@ const projectKey = urlParams.get("projectId");
 const owned = !!urlParams.get("owned");
 const usertype = !!urlParams.get("user");
 
+<<<<<<< HEAD
 const ProjectLogo = document.querySelector(".overview__header__logo");
 const ProjectName = document.querySelector(".overview__header__projectName");
 const ProjectType = document.querySelector(".overview__header__projectType");
 const ProjectDescription = document.querySelector(
   ".overview__header__projectDescription"
 );
+=======
+const projectKey = urlParams.get('projectId');
+const owned = !!urlParams.get('owned');
+const usertype = urlParams.get('user');
+>>>>>>> ChangeRoutes
 
 const ProjectBudget = document.querySelector(".overview__header__budget");
 const ProjectDeadline = document.querySelector(".overview__header__deadline");
@@ -42,6 +49,22 @@ btnReturnToDashBoard.addEventListener("click", () => {
     API.GoToStudentDashboard();
   }
 });
+
+const candidatesTitle = document.querySelector("#overview__candidates__title");
+const candidatesContainer = document.querySelector("#overview__candidates__container");
+
+
+if (usertype != "recruiter") {
+    if (candidatesTitle) candidatesTitle.remove();
+    if (candidatesContainer) candidatesContainer.remove();
+
+
+} else {
+    if (DeliverButton) DeliverButton.remove();
+    if (ApplyButton) ApplyButton.remove();
+}
+
+
 
 if (DeliverButton) {
   if (!owned) {
@@ -182,12 +205,41 @@ const FillInformation = (projectData) => {
 
     //   if (!ProjectSkills) return;
 
+<<<<<<< HEAD
     //   const skill = document.createElement("p");
     //   skill.classList.add("overview__body__skill");
     //   skill.textContent = projectData.moves[i].move.name;
     //   ProjectSkills.append(skill);
     // }
   }
+=======
+
+    if (candidatesContainer) {
+
+        for (let i = 0; i < projectData.moves.length; i++) {
+
+            const card = ListCard.CreateProjectCard({
+                project: {
+                    name: projectData.moves[i].move.name,
+                    logoUri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${i + 1}.png`
+                }, primaryBtn: {
+                    label: 'Aceptar',
+                    onclick: () => { }
+                },
+                secondaryBtn: {
+                    label: 'Rechazar',
+                    onclick: () => { }
+                }
+            });
+
+            candidatesContainer.appendChild(card);
+        }
+    }
+
+
+    if (WebsiteButton) WebsiteButton.href = projectData.species.url;
+    if (LinkedInButton) LinkedInButton.href = projectData.location_area_encounters;
+>>>>>>> ChangeRoutes
 
   if (WebsiteButton) WebsiteButton.href = projectData.species.url;
   if (LinkedInButton)

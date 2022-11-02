@@ -44,7 +44,7 @@ const LoadVacancies = async () => {
 
 
     if (!vacancyContainer) return;
-    vacancyContainer.innerHTML = `<a href="./../NewProject/NewProject.html">
+    vacancyContainer.innerHTML = `<a href="${API.GetStaticRoute('Pages/Recruiter/NewProject/NewProject.html')}">
     <article class="projectCard new" "><img
             class=" projectCard__thumbnail" src="./resources/newProject icon.png">
         <p class="projectCard__owner">Crear un nuevo proyecto</p>
@@ -55,16 +55,21 @@ const LoadVacancies = async () => {
     const projects = await API.GetProjects('pokemon');
 
     const OnProjectClicked = (id) => {
-        window.location.href = `./../../Projects/overview.html?projectId=${id}`;
+        API.GoTo(`Pages/Projects/overview.html?projectId=${id}&user=recruiter`)
 
     }
 
     if (!projects) return;
 
     projects.forEach((project, index) => {
-        const card = ProjectCard.Create(project,
-            () => OnProjectClicked(index + 1),
-            'Revisar');
+        const card = ProjectCard.Create(
+            {
+                project: project,
+                primaryBtn: {
+                    label: 'Revisar',
+                    onclick: () => OnProjectClicked(index + 1)
+                }
+            });
 
 
         if (!card) return;
