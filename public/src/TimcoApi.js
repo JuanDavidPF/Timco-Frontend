@@ -6,41 +6,36 @@ const API = (() => {
   const loggedStudentKey = "loggedStudent";
   const loggedRecruiterKey = "loggedRecruiter";
 
-  // Api to test post and get requests ->
   // read how it works at: http://ptsv2.com/
 
   const toiletApi = "http://localhost:3000";
+  const StaticHost = "http://127.0.0.1:5500";
+
   // const toiletApi = "https://timco-api.herokuapp.com";
   //const toiletID = "o6jno-1663906012";
   const postURL = `${toiletApi}/api/v1`;
   const getURL = `https://pokeapi.co/api/v2`;
 
-  const GoToRecruiterDashboard = () =>
-    window.location.replace(
-      `http://${window.location.host}/public/Pages/Recruiter/Dashboard/dashboard.html`
-    );
-  const GoToStudentDashboard = () =>
-    window.location.replace(
-      `http://${window.location.host}/public/Pages/Student/Dashboard/dashboard.html`
-    );
+  const GoToRecruiterDashboard = () => {
+    GoTo("Pages/Recruiter/Dashboard/dashboard.html");
+  };
+  const GoToStudentDashboard = () => {
+    GoTo("Pages/Student/Dashboard/dashboard.html");
+  };
 
-  const GoToRecruiterDetails = () =>
-    window.location.replace(
-      `http://${window.location.host}/public/Pages/Recruiter/Details/details.html`
-    );
-  const GoToStudentDetails = () =>
-    window.location.replace(
-      `http://${window.location.host}/public/Pages/Student/Details/details.html`
-    );
+  const GoToRecruiterDetails = () => {
+    GoTo("Pages/Recruiter/Details/details.html");
+  };
+  const GoToStudentDetails = () => {
+    GoTo("Pages/Student/Details/details.html");
+  };
 
-  const GoToRecruiterLogin = () =>
-    window.location.replace(
-      `http://${window.location.host}/public/Pages/Recruiter/Login/login.html`
-    );
-  const GoToStudentLogin = () =>
-    window.location.replace(
-      `http://${window.location.host}/public/Pages/Student/Login/login.html`
-    );
+  const GoToRecruiterLogin = () => {
+    GoTo("Pages/Recruiter/Login/login.html");
+  };
+  const GoToStudentLogin = () => {
+    GoTo("Pages/Student/Login/login.html");
+  };
 
   /////////////////////////////////////////////
   /////////Student methods
@@ -54,16 +49,15 @@ const API = (() => {
       body: JSON.stringify(student),
     });
     const response = await request.json();
-    console.log(response.error);
 
     if (response.error) {
-      console.log("Entro al error");
       return response.error;
     }
     const currentUserId = parseJwt(response.access).data.studentId;
     const user = parseJwt(response.access).data;
     // debugger
     localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", response.access);
     localStorage.setItem(loggedStudentKey, currentUserId);
     GoToStudentDashboard();
   };
@@ -75,13 +69,12 @@ const API = (() => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(student),
     });
-    console.log(request);
     const response = await request.json();
 
     if (response.error) return response.error;
     let currentUserId = parseJwt(response.accessToken).data;
-    console.log("Data", currentUserId);
     localStorage.setItem(loggedStudentKey, currentUserId);
+    localStorage.setItem("token", response.access);
     GoToStudentDetails();
   };
   //Closes SignUpRecruiter method
@@ -92,17 +85,11 @@ const API = (() => {
         method: "POST",
         body: JSON.stringify(details),
       });
-      console.log(request);
       switch (request.status) {
         case 200:
-          // Instead of storing student You should store whatever the server
-          // responds to a succesful login - it should contain user credentials
-
           GoToStudentDashboard();
           break;
-
         case 404:
-          console.log(request);
           alert("La petición no dió resultado");
           break;
       }
@@ -120,7 +107,8 @@ const API = (() => {
   }; //Closes IsStudentLogged method
 
   const SignOutStudent = () => {
-    localStorage.setItem(loggedStudentKey, "");
+    localStorage.removeItem(loggedStudentKey);
+    localStorage.removeItem("token");
     GoToStudentLogin();
     return;
   }; //Closes SignOutStudent method
@@ -138,8 +126,8 @@ const API = (() => {
     });
     const response = await request.json();
     if (response.error) return response.error;
-   console.log(response.data.companyId);
-    let currentUserId = response.data;
+
+    const currentUserId = parseJwt(response.access).data;
     localStorage.setItem(loggedRecruiterKey, currentUserId);
     GoToRecruiterDetails();
   }; //Closes SignUpRecruiter method
@@ -156,7 +144,7 @@ const API = (() => {
     const response = await request.json();
     if (response.error) return response.error;
 
-    const currentUserId = parseJwt(response.access).data.companyId;
+    const currentUserId = parseJwt(response.access).data;
     localStorage.setItem(loggedRecruiterKey, currentUserId);
     localStorage.setItem("token", response.access);
 
@@ -170,17 +158,14 @@ const API = (() => {
         method: "POST",
         body: JSON.stringify(details),
       });
-      console.log(request);
       switch (request.status) {
         case 200:
           // Instead of storing student You should store whatever the server
           // responds to a succesful login - it should contain user credentials
-
           GoToRecruiterDashboard();
           break;
 
         case 404:
-          console.log(request);
           alert("La petición no dió resultado");
           break;
       }
@@ -190,7 +175,8 @@ const API = (() => {
   }; //Closes UploadStudentDetails method
 
   const SignOutRecruiter = () => {
-    localStorage.setItem(loggedRecruiterKey, "");
+    localStorage.removeItem(loggedRecruiterKey);
+    localStorage.removeItem("token");
     GoToRecruiterLogin();
   }; //Closes SignOutStudent method
 
@@ -199,9 +185,8 @@ const API = (() => {
   };
 
   const IsRecruiterLogged = () => {
-    console.log(localStorage.getItem(loggedRecruiterKey));
     return !!localStorage.getItem(loggedRecruiterKey);
-  }; //Closes IsStudentLogged method
+  }; //Closes IsRecruiterLogged method
 
   /////////////////////////////////////////////
   /////////Projects methods
@@ -216,6 +201,58 @@ const API = (() => {
           const data = await request.json();
           return data.results;
 
+        default:
+          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
+
+  const GetCandidatesByStudentId = async (studentKey) => {
+    try {
+      const request = await fetch(`${postURL}/candidate/student/${studentKey}`);
+      switch (request.status) {
+        case 200:
+          const res = await request.json();
+          return res.data;
+        default:
+          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
+
+  const GetCandidatesByProjectId = async (projectKey) => {
+    try {
+      const request = await fetch(`${postURL}/candidate/project/${projectKey}`);
+      switch (request.status) {
+        case 200:
+          const res = await request.json();
+          return res.data;
+        default:
+          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
+
+  const PutCandidateProject = async (candidateData) => {
+    try {
+      const request = await fetch(`${postURL}/candidate`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(candidateData),
+      });
+      switch (request.status) {
+        case 200:
+          const res = await request.json();
+          return res.data;
         default:
           alert("Hubo un problema, intentalo de nuevo en unos minutos");
           break;
@@ -241,6 +278,49 @@ const API = (() => {
     }
   };
 
+  const GetProfileByID = async (profileID) => {
+    try {
+      const request = await fetch(`${getURL}/pokemon/${profileID}`);
+
+      switch (request.status) {
+        case 200:
+          const data = await request.json();
+          data.pokedex = await fetch(`${getURL}/pokemon-species/${profileID}`);
+          data.pokedex = await data.pokedex.json();
+          data.pokedex = data.pokedex.flavor_text_entries[20].flavor_text;
+
+          return data;
+
+        default:
+          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
+
+  const GetActiveProjects = async ({
+    entityId = 0,
+    entityType = "student",
+  }) => {
+    try {
+      const request = await fetch(
+        `${postURL}/project/${entityType}/active/${entityId}`
+      );
+      switch (request.status) {
+        case 200:
+          const data = await request.json();
+          return data;
+        default:
+          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  };
+
   const GetActiveProjectsByStudent = async (studentId) => {
     try {
       const request = await fetch(
@@ -250,13 +330,7 @@ const API = (() => {
       switch (request.status) {
         case 200:
           const data = await request.json();
-          //   data.pokedex = await fetch(`${getURL}/pokemon-species/${projectID}`);
-          //   data.pokedex = await data.pokedex.json();
-          //   data.pokedex = data.pokedex.flavor_text_entries[20].flavor_text;
-          console.log(data);
-
           return data;
-
         default:
           alert("Hubo un problema, intentalo de nuevo en unos minutos");
           break;
@@ -277,12 +351,8 @@ const API = (() => {
         case 200:
           // Instead of storing student You should store whatever the server
           // responds to a succesful login - it should contain user credentials
-
           return true;
-          break;
-
         case 404:
-          console.log(request);
           alert("La petición no dió resultado");
           break;
       }
@@ -291,59 +361,49 @@ const API = (() => {
     }
   };
 
-  const JoinProjectRequest = async (student) => {
-      try {
-  
-          const request = await
-              fetch(postURL, {
-                  method: 'POST',
-                  body: JSON.stringify(student)
-              });
-  
-          switch (request.status) {
-  
-              case 200:
-  
-                  // Instead of storing student You should store whatever the server
-                  // responds to a succesful login - it should contain user credentials
-  
-                  return true;
-                  break;
-  
-              case 404:
-                  console.log(request)
-                  alert("La petición no dió resultado");
-                  break;
-          }
-      } catch (error) {
-  
-          alert("Hubo un problema, intentalo de nuevo en unos minutos");
+  const JoinProjectRequest = async (candidateData) => {
+    try {
+      const request = await fetch(`${postURL}/candidate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(candidateData),
+      });
+
+      switch (request.status) {
+        case 201:
+          return true;
+        case 404:
+          alert("La petición no dió resultado");
+          break;
       }
-  }
-  
-    const UploadProject = async (project) => {
-      try {
-        const request = await fetch(postURL, {
-          method: "POST",
-          body: JSON.stringify(project),
-        });
-        console.log(request);
-        switch (request.status) {
-          case 200:
-            break;
-  
-          case 404:
-            console.log(request);
-            alert("La petición no dió resultado");
-            break;
-        }
-      } catch (error) {
-        alert("Hubo un problema, intentalo de nuevo en unos minutos");
-      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
   };
 
-
-  
+  const UploadProject = async (project, token) => {
+    token = localStorage.getItem("token");
+    try {
+      const request = await fetch(`${postURL}/project`, {
+        method: "PUT",
+        body: JSON.stringify(project),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      switch (request.status) {
+        case 200:
+          console.log(request.json())
+          break;
+        case 404:
+          alert("La petición no dió resultado");
+          break;
+      }
+    } catch (error) {
+      alert("Hubo un problema, intentalo de nuevo en unos minutos");
+    }
+  }; //Closes UploadStudentDetails method
 
   //Method for load data for current user logged
   const loadCurrentUserData = async () => {
@@ -386,175 +446,14 @@ const API = (() => {
       }
     }
   };
+  //Add all methods to make them public to other scripts
+
   const GetStaticRoute = (route) => {
     return `${StaticHost}/public/${route}`;
-  }
+  };
   const GoTo = (route) => {
-    window.location.href = GetStaticRoute(route);;
+    window.location.href = GetStaticRoute(route);
   };
-  }; //Closes UploadStudentDetails method
-
-
-  const SignOutRecruiter = () => {
-    localStorage.setItem(loggedRecruiterKey, "");
-    GoToRecruiterLogin();
-  }; //Closes SignOutStudent method
-
-  const IsRecruiterLogged = () => {
-    return !!localStorage.getItem(loggedRecruiterKey);
-  }; //Closes IsStudentLogged method
-
-  /////////////////////////////////////////////
-  /////////Projects methods
-  /////////////////////////////////////////////
-
-  const GetProjects = async (key) => {
-    try {
-      const request = await fetch(`${getURL}/${key}`);
-
-      switch (request.status) {
-        case 200:
-          const data = await request.json();
-          return data.results;
-
-        default:
-          alert("Hubo un problema, intentalo de nuevo en unos minutos");
-          break;
-      }
-    } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  };
-
-
-  const GetProjectByID = async (projectID) => {
-    try {
-      const request = await fetch(`${getURL}/pokemon/${projectID}`);
-
-      switch (request.status) {
-        case 200:
-          const data = await request.json();
-          data.pokedex = await fetch(`${getURL}/pokemon-species/${projectID}`);
-          data.pokedex = await data.pokedex.json();
-          data.pokedex = data.pokedex.flavor_text_entries[20].flavor_text;
-
-          return data;
-
-        default:
-          alert("Hubo un problema, intentalo de nuevo en unos minutos");
-          break;
-      }
-    } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  };
-
-  const GetProfileByID = async (profileID) => {
-    try {
-      const request = await fetch(`${getURL}/pokemon/${profileID}`);
-
-      switch (request.status) {
-        case 200:
-          const data = await request.json();
-          data.pokedex = await fetch(`${getURL}/pokemon-species/${profileID}`);
-          data.pokedex = await data.pokedex.json();
-          data.pokedex = data.pokedex.flavor_text_entries[20].flavor_text;
-
-          return data;
-
-        default:
-          alert("Hubo un problema, intentalo de nuevo en unos minutos");
-          break;
-      }
-    } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  };
-
-
-  const SubmitProject = async (project) => {
-    try {
-
-      const request = await
-        fetch(postURL, {
-          method: 'POST',
-          body: JSON.stringify(project)
-        });
-
-      switch (request.status) {
-
-        case 200:
-
-          // Instead of storing student You should store whatever the server
-          // responds to a succesful login - it should contain user credentials
-
-          return true;
-          break;
-
-        case 404:
-          console.log(request)
-          alert("La petición no dió resultado");
-          break;
-      }
-    } catch (error) {
-
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  }
-
-  const JoinProjectRequest = async (student) => {
-    try {
-
-      const request = await
-        fetch(postURL, {
-          method: 'POST',
-          body: JSON.stringify(student)
-        });
-
-      switch (request.status) {
-
-        case 200:
-
-          // Instead of storing student You should store whatever the server
-          // responds to a succesful login - it should contain user credentials
-
-          return true;
-          break;
-
-        case 404:
-          console.log(request)
-          alert("La petición no dió resultado");
-          break;
-      }
-    } catch (error) {
-
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  }
-
-  const UploadProject = async (project) => {
-    try {
-      const request = await fetch(postURL, {
-        method: "POST",
-        body: JSON.stringify(project),
-      });
-      console.log(request);
-      switch (request.status) {
-        case 200:
-          break;
-
-        case 404:
-          console.log(request);
-          alert("La petición no dió resultado");
-          break;
-      }
-    } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  }; //Closes UploadStudentDetails method
-
- 
-  //Add all methods to make them public to other scripts
 
   return {
     GetProjects,
@@ -572,6 +471,10 @@ const API = (() => {
     SubmitProject,
     JoinProjectRequest,
     GetActiveProjectsByStudent,
+    GetActiveProjects,
+    GetCandidatesByProjectId,
+    GetCandidatesByStudentId,
+    PutCandidateProject,
 
     LogInRecruiter,
     SignUpRecruiter,
@@ -583,11 +486,12 @@ const API = (() => {
     GoToRecruiterDashboard,
     GoToRecruiterDetails,
     GoToRecruiterLogin,
+    GetStaticRoute,
+    GoTo,
+    GetProfileByID,
 
     loadCurrentUserData,
-    GetStaticRoute,
-    GoTo
   };
 })();
 
-export default API; //API TO COMUNICATE FRONT WITH BACK
+export default API;

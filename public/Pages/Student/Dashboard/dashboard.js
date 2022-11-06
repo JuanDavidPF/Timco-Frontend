@@ -1,9 +1,14 @@
 import ListCard from "../../../Components/ListCard/ListCard.js";
 import ProjectCard from "../../../Components/ProjectCard/ProjectCard.js";
 import API from "./../../../src/TimcoApi.js";
-import codedecJwt from "./../../../src/utils/parseJWT.js";
+import parseJwt from "./../../../src/utils/parseJWT.js";
+import constants from "../../../src/utils/constants.js";
+
+const token = localStorage.getItem("token");
+const userData = parseJwt(token).data;
 
 let projects = [];
+let candidateProjects = [];
 
 document.getElementById("signOutButton").addEventListener("click", () => {
   SignOut();
@@ -19,31 +24,13 @@ const finishedTabEle = document.getElementById("finished-tab");
 const waitingTabEle = document.getElementById("waiting-tab");
 
 const getUserData = () => {
-  //
-  //   const token = localStorage.getItem("token");
-  //   const userData = codedecJwt(token);
-  //   debugger;
-  let userData = localStorage.getItem("user");
-
   if (userData !== null) {
-    userData = JSON.parse(userData);
-    // let userName = userData.data.name;
     let userName = userData.name;
     let userDetail = userData.area.name;
-
-    // if (API.IsRecruiterLogged) {
-    //   userDetail = userData.data.companyName;
-    // } else {
-    //   userDetail = userData.data.area.name;
-    // }
-    //projectKey.value = userName;
 
     const userNameSideBar = document.getElementById("userName");
     const userDetailSideBar = document.getElementById("userDetail");
     const helloUserNameTitle = document.getElementById("helloUserName");
-
-    //   console.log(userNameSideBar.innerHTML);
-    //   console.log(userDetailSideBar);
 
     userNameSideBar.innerHTML = userName;
     helloUserNameTitle.innerHTML = userName;
@@ -52,144 +39,153 @@ const getUserData = () => {
 };
 
 const LoadVacancies = async () => {
-  if (!vacancyContainer) return;
-  vacancyContainer.innerHTML = null;
+  let candidateProjectsIds = [];
+  let token = localStorage.getItem("token");
+  let userData = parseJwt(token).data;
 
-  const projects = await API.GetProjects("pokemon");
+  const candidatesByStudent = await API.GetCandidatesByStudentId(
+    userData.studentId
+  );
+  if (candidatesByStudent.length > 0) {
+    candidateProjects = candidatesByStudent;
+    candidateProjectsIds = candidatesByStudent.map(
+      ({ projectId }) => projectId
+    );
+  }
 
-<<<<<<< HEAD
-  const OnProjectClicked = (id) => {
-    window.location.href = `./../../Projects/overview.html?projectId=${id}`;
-  };
+  const projectsData = await API.GetActiveProjects({
+    entityId: userData.studentId,
+  });
 
-  if (!projects) return;
-=======
-    if (!vacancyContainer) return;
-    vacancyContainer.innerHTML = null;
-
-    const projects = await API.GetProjects('pokemon');
-
-    const OnProjectClicked = (id) => {
-        API.GoTo(`Pages/Projects/overview.html?projectId=${id}`)
+  let projectsFilter = projectsData.data.filter((project) => {
+    if (!candidateProjectsIds.includes(project.projectId)) {
+      return project.state.stateId === constants.states.UNASSIGNED_PROJECT_ID;
     }
+  });
 
-    if (!projects) return;
-
-    projects.forEach((project, index) => {
-        const card = ProjectCard.Create(
-            {
-                project: project,
-                primaryBtn: {
-                    label: 'Revisar',
-                    onclick: () => OnProjectClicked(index + 1)
-                }
-            });
-
-        if (!card) return;
-        vacancyContainer.appendChild(card);
->>>>>>> ChangeRoutes
-
-  projects.forEach((project, index) => {
-    const card = ProjectCard.Create(project, () => OnProjectClicked(index + 1));
+  if (!projectsFilter) return;
+  projectsFilter.forEach((project) => {
+    const card = ProjectCard.Create({
+      project,
+      primaryBtn: {
+        label: "Revisar",
+        onclick: () =>
+          OnProjectClicked({ id: project.projectId, owner: false }),
+      },
+    });
     if (!card) return;
     vacancyContainer.appendChild(card);
   });
-}; //Closes LoadVacancies method
+};
 
 const LoadMyProjects = async () => {
-<<<<<<< HEAD
   if (!myProjectsContainer) return;
   myProjectsContainer.innerHTML = null;
 
-  let userData = localStorage.getItem("user");
-  if (userData !== null) {
-    userData = JSON.parse(userData);
+  let token = localStorage.getItem("token");
+  let userData = parseJwt(token).data;
 
-    projects = await API.GetActiveProjectsByStudent(userData.studentId);
+  if (userData !== null) {
+    projects = await API.GetActiveProjects({ entityId: userData.studentId });
     if (projects.data.length === 0) return;
     projects = projects.data;
-    console.group("ORIGINAL PROJECTS");
-    console.log(projects);
-    console.groupEnd();
-    drawProjectsByState(1);
+    drawProjectsByState(constants.states.ACTIVE_PROJECT_ID);
   }
 }; //Closes LoadVacancies method
 
 const drawProjectsByState = (state) => {
-  let projectsFilter = projects.filter(
-    (project) => project.state.stateId === state
-  );
-  console.group("SELECTED STATUS", state);
-  console.log(projectsFilter);
-  console.groupEnd();
+  let projectsFilter = [];
+  if (state === constants.states.WAITING_PROJECT_ID) {
+    projectsFilter = candidateProjects.filter(
+      (candidate) => candidate.stateId === state
+    );
+    projectsFilter = projectsFilter.map(({ project }, index) => {
+      return { ...project, state: candidateProjects[index].state };
+    });
+  } else {
+    projectsFilter = projects.filter(
+      (project) => project.state.stateId === state
+    );
+  }
+
   drawProjects({ projects: projectsFilter });
 };
 
 const drawProjects = ({ projects = [] }) => {
   myProjectsContainer.innerHTML = null;
 
-  projects.forEach((project, index) => {
-    // debugger;
-    // const id = project.projectId;
-    // debugger;
-    // console.log('Go to detail project with id =', id);
-    console.log(project);
+  projects.forEach((project) => {
+    let card;
+    switch (project.state.stateId) {
+      case constants.states.ACTIVE_PROJECT_ID:
+        card = ListCard.CreateProjectCard({
+          project,
+          primaryBtn: {
+            label: "Entregar",
+            visible: "true",
+            onclick: () => OnProjectClicked({ id: project.projectId }),
+          },
+          secondaryBtn: {
+            label: "Ver Brief",
+            visible: "true",
+            onclick: () => OnProjectClicked({ id: project.projectId }),
+          },
+        });
 
-    const card = ListCard.CreateProjectCard(
-      project,
-      () => OnProjectClicked(project.projectId),
-      () => OnProjectClicked(project.projectId)
-    );
+        break;
+      case constants.states.FINISHED_PROJECT_ID:
+        card = ListCard.CreateProjectCard({
+          project,
+          primaryBtn: {
+            visible: false,
+          },
+          secondaryBtn: {
+            label: "Ver Brief",
+            visible: "true",
+            onclick: () => OnProjectClicked({ id: project.projectId }),
+          },
+        });
+        break;
+      case constants.states.WAITING_PROJECT_ID:
+        card = ListCard.CreateProjectCard({
+          project,
+          primaryBtn: {
+            visible: false,
+          },
+          secondaryBtn: {
+            label: "Ver Brief",
+            visible: "true",
+            onclick: () => OnProjectClicked({ id: project.projectId }),
+          },
+        });
+        break;
+    }
+
     if (!card) return;
     myProjectsContainer.appendChild(card);
   });
 };
 
-const OnProjectClicked = (id) => {
-  debugger;
-  window.location.href = `./../../Projects/overview.html?projectId=${id}&owned=true`;
+const OnProjectClicked = ({ id = 0, owner = true }) => {
+  if (!owner) {
+    window.location.href = `./../../Projects/overview.html?projectId=${id}`;
+  } else {
+    window.location.href = `./../../Projects/overview.html?projectId=${id}&owned=${owner}`;
+  }
 };
-=======
-
-
-    if (!myProjectsContainer) return;
-    myProjectsContainer.innerHTML = null;
-
-    const projects = await API.GetProjects('pokemon');
-
-    const OnProjectClicked = (id) => {
-        API.GoTo(`Projects/overview.html?projectId=${id}&owned=true&user=student`)
-    }
-
-
-    if (!projects) return;
-
-    projects.forEach((project, index) => {
-        const card = ListCard.CreateProjectCard(project, () => OnProjectClicked(index + 1), () => OnProjectClicked(index + 1));
-        if (!card) return;
-        myProjectsContainer.appendChild(card);
-
-    });
-
-}//Closes LoadVacancies method
-
-
-
-
->>>>>>> ChangeRoutes
 
 const SignOut = () => {
   API.SignOutStudent();
 };
 
 activeTabEle.addEventListener("click", function () {
-  drawProjectsByState(1);
+  drawProjectsByState(constants.states.ACTIVE_PROJECT_ID);
 });
 finishedTabEle.addEventListener("click", function () {
-  drawProjectsByState(3);
+  drawProjectsByState(constants.states.FINISHED_PROJECT_ID);
 });
 waitingTabEle.addEventListener("click", function () {
-  drawProjectsByState(2);
+  drawProjectsByState(constants.states.WAITING_PROJECT_ID);
 });
 
 LoadVacancies();

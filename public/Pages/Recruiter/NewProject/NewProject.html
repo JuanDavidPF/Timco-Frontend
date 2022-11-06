@@ -45,8 +45,8 @@
 
 
                 <div class="mainCardsForm__form">
-                    <input class="selectable_card_input" required type="radio" name="projectArea" id="UX/UI"
-                        value="UI/UX Design">
+                    <input class="selectable_card_input" required type="radio" name="areaId" id="UX/UI"
+                        value=1>
 
                     <label class="selectable_card" style="background-color: #E0FE68;" for="UX/UI">
                         <img src="./resources/ui-ux.png">
@@ -54,16 +54,16 @@
                     </label>
 
 
-                    <input class="selectable_card_input" required type="radio" name="projectArea" id="Dev"
-                        value="Development">
+                    <input class="selectable_card_input" required type="radio" name="areaId" id="Dev"
+                        value=2>
 
                     <label class="selectable_card" style="background-color:#8AC2DD;" for="Dev">
                         <img src="./resources/dev.png">
                         <p>Desarrollo</p>
                     </label>
 
-                    <input class="selectable_card_input" required type="radio" name="projectArea" id="Marketing"
-                        value="Marketing">
+                    <input class="selectable_card_input" required type="radio" name="areaId" id="Marketing"
+                        value=3 >
 
                     <label class="selectable_card" style="background-color:#00D380;" for="Marketing">
                         <img src="./resources/marketing.png">
@@ -90,7 +90,7 @@
                     <label for="projectName">
                         <p>Nombre del Proyecto</p>
                     </label>
-                    <input required="true" type="text" id="projectName" name="projectName"
+                    <input required="true" type="text" id="projectName" name="name"
                         placeholder="Ej: Diseño de pagina web para marca de ropa infantil">
                 </div>
 
@@ -119,7 +119,7 @@
                     <label for="projectDescription">
                         <p>Descripción del proyecto*</p>
                     </label>
-                    <textarea required="true" rows="8" cols="5" name="projectDescription" id="projectDescription"
+                    <textarea required="true" rows="8" cols="5" name="description" id="projectDescription"
                         placeholder="Ej: Necesito diseñar una pagina web de ropa infantil para dentro de un mes para el lanzamiento de mi marca personal. Los colores y las imagenes ya están definidas al igual que la descripción de cada producto. "></textarea>
                 </div>
 
@@ -184,7 +184,7 @@
                     <label for="projectDeadline">
                         <p>Fecha de entrega del proyecto*</p>
                     </label>
-                    <input required="true" type="date" id="projectDeadline" name="projectDeadline"
+                    <input required="true" type="date" id="projectDeadline" name="timelineDate"
                         placeholder="dd/mm/yyyy">
                 </div>
 
@@ -193,7 +193,7 @@
                         <p>Selecciona el pago del proyecto*</p>
                     </label>
                     <input min="850000" max="1200000" step="10000" required="true" type="number" id="projectBudget"
-                        placeholder="Presupuesto" name="projectBudget" value="850000">
+                        placeholder="Presupuesto" name="priceTotal" value="850000">
 
                     <br>
                     <div style="display: flex; width:100%; justify-content: space-between; gap: 20px;">

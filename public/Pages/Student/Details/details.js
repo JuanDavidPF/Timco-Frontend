@@ -114,7 +114,6 @@ window.PreviousSection = () => {
 }
 
 const FinishForm = async () => {
-    console.log(details);
     API.UploadStudentDetails(details);
 }
 
