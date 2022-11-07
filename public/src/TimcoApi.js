@@ -323,9 +323,7 @@ const API = (() => {
 
   const GetActiveProjectsByStudent = async (studentId) => {
     try {
-      const request = await fetch(
-        `${postURL}/project/student/active/${studentId}`
-      );
+      const request = await fetch(`${getURL}/pokemon/${profileID}`);
 
       switch (request.status) {
         case 200:
@@ -340,26 +338,7 @@ const API = (() => {
     }
   };
 
-  const SubmitProject = async (project) => {
-    try {
-      const request = await fetch(postURL, {
-        method: "POST",
-        body: JSON.stringify(project),
-      });
 
-      switch (request.status) {
-        case 200:
-          // Instead of storing student You should store whatever the server
-          // responds to a succesful login - it should contain user credentials
-          return true;
-        case 404:
-          alert("La petición no dió resultado");
-          break;
-      }
-    } catch (error) {
-      alert("Hubo un problema, intentalo de nuevo en unos minutos");
-    }
-  };
 
   const JoinProjectRequest = async (candidateData) => {
     try {

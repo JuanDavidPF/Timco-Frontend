@@ -119,6 +119,22 @@ main {
     color: var(--darkerGray);
 }
 
+.overview__header__specialization,
+.overview__header__university {
+    color: var(--darkerGray);
+}
+
+.overview__header__specialization-img {
+    margin-right: 20px;
+}
+
+.overview__main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
 .overview__body {
     display: flex;
     flex-direction: column;
@@ -127,6 +143,10 @@ main {
     padding: 36px;
     border-radius: 14px;
     background-color: white;
+}
+
+.overview__header__specialization__icon {
+    width: 24px;
 }
 
 .overview__body__skills {
@@ -145,10 +165,11 @@ main {
 .overview__attached {
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     gap: 14px;
     padding: 30px 20px;
     height: fit-content;
-    width: 550px;
+    width: 350px;
     border-radius: 14px;
     background-color: white;
 }
@@ -161,6 +182,34 @@ main {
     border-style: none;
 }
 
+.overview__reviews {
+    display: flex;
+    gap: 20px;
+}
+
+.overview__review__star {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(./resources/emptyStar.png);
+    width: 30px;
+    height: 30px;
+}
+
+.overview__review__star.filled {
+    background-image: url(./resources/fullStar.png);
+}
+
+
+.overview__body__experience__summary {
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: #E0E0E0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .modal {
     background-color: #1f1f1f7c;

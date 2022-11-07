@@ -53,6 +53,7 @@ const LoadVacancies = async () => {
     );
   }
 
+<<<<<<< HEAD
   const projectsData = await API.GetActiveProjects({
     entityId: userData.studentId,
   });
@@ -62,6 +63,39 @@ const LoadVacancies = async () => {
       return project.state.stateId === constants.states.UNASSIGNED_PROJECT_ID;
     }
   });
+=======
+<<<<<<< HEAD
+  const OnProjectClicked = (id) => {
+    window.location.href = `./../../Projects/overview.html?projectId=${id}`;
+  };
+
+  if (!projects) return;
+=======
+    if (!vacancyContainer) return;
+    vacancyContainer.innerHTML = null;
+
+    const projects = await API.GetProjects('pokemon');
+
+    const OnProjectClicked = (id) => {
+        API.GoTo(`Pages/Projects/overview.html?projectId=${id}`)
+    }
+
+    if (!projects) return;
+
+    projects.forEach((project, index) => {
+        const card = ProjectCard.Create(
+            {
+                project: project,
+                primaryBtn: {
+                    label: 'Revisar',
+                    onclick: () => OnProjectClicked(index + 1)
+                }
+            });
+
+        if (!card) return;
+        vacancyContainer.appendChild(card);
+>>>>>>> ChangeRoutes
+>>>>>>> 478924d730ac22c54b6d3dd6f69df826244d1914
 
   if (!projectsFilter) return;
   projectsFilter.forEach((project) => {
@@ -79,6 +113,7 @@ const LoadVacancies = async () => {
 };
 
 const LoadMyProjects = async () => {
+<<<<<<< HEAD
   if (!myProjectsContainer) return;
   myProjectsContainer.innerHTML = null;
 
@@ -173,6 +208,34 @@ const OnProjectClicked = ({ id = 0, owner = true }) => {
     window.location.href = `./../../Projects/overview.html?projectId=${id}&owned=${owner}`;
   }
 };
+=======
+
+
+    if (!myProjectsContainer) return;
+    myProjectsContainer.innerHTML = null;
+
+    const projects = await API.GetProjects('pokemon');
+
+    const OnProjectClicked = (id) => {
+        API.GoTo(`Projects/overview.html?projectId=${id}&owned=true&user=student`)
+    }
+
+
+    if (!projects) return;
+
+    projects.forEach((project, index) => {
+        const card = ListCard.CreateProjectCard(project, () => OnProjectClicked(index + 1), () => OnProjectClicked(index + 1));
+        if (!card) return;
+        myProjectsContainer.appendChild(card);
+
+    });
+
+}//Closes LoadVacancies method
+
+
+
+
+>>>>>>> ChangeRoutes
 
 const SignOut = () => {
   API.SignOutStudent();
