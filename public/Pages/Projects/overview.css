@@ -95,17 +95,29 @@ main {
     display: flex;
     flex-direction: column;
 
+    width: 70%;
+    font-family: 'Barlow';
+    color: var(--indigo);
+    font-size: 18px;
     gap: 30px;
     padding: 36px;
     border-radius: 14px;
     background-color: white;
 }
+.overview__body__projectsRequirements{
+    width: 100%;
 
+}
 .overview__body__skills {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    margin-bottom: 20px
 }
+
+#skills__required__container{
+    margin-bottom: 20px;
+} 
 
 .overview__body__skill {
     padding: 8px 13px;

@@ -15,14 +15,13 @@ document.querySelector('.login__form').addEventListener('submit', async e => {
     const res = await AttemptRegistration(newRecruiter);
     if(res.status === 'error') {
         console.error(res.message);
-        let inputEmail = document.getElementById('studentEmail');
-        
+        let inputEmail = document.getElementById('recruiterEmail');
 
         let labelEmail = document.getElementById('create-recruiter-email-label');
+        let errEmailExistEle = document.getElementById('email-exists-err');
         switch (res.message) {
             case 'create/email-company-exists':
                 
-                let errEmailExistEle = document.getElementById('email-exists-err');
                 errEmailExistEle.style.display = 'block';
                 errEmailExistEle.style.color = 'red'; 
                 labelEmail.style.color = 'red'; 

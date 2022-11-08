@@ -96,7 +96,6 @@ main {
 }
 
 
-
 .dashboard_me__stats {
 
     height: fit-content;
@@ -115,4 +114,10 @@ main {
     width: 150px;
     background: #FFFFFF;
     border-radius: 14px;
+}
+
+
+.dashboard_new__projects__nav>a{
+    width:fit-content; 
+
 }

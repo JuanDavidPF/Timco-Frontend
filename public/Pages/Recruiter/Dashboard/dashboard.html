@@ -23,7 +23,9 @@
             <img src="./../../../Components/Sidebar/resources/logo.png" alt="" srcset="">
             <img src="./../../../Components/Sidebar/resources/profilePicture2.png" alt="" srcset="">
 
-            <p>Laura Carvajal<br>Procter & Gamble</p>
+            <p id="userName">Laura Carvajal</p>
+            <p id="userDetail"> Procter & Gamble</p>
+                
 
         </div>
 
@@ -50,7 +52,7 @@
 
     </nav>
     <main>
-        <h1>¡Hola, Laura!</h1>
+        <h1>¡Hola, <span id="helloUserName">Laura</span>!</h1>
         <p>Aqui encontrarás todo lo relacionado</p>
 
 
@@ -58,13 +60,25 @@
         <section class="dashboard_me">
 
             <section class="dashboard_me__projects">
+                <h5>Crear un nuevo proyecto</h5>
+
+                <div class="dashboard_new__projects__nav">
+
+
+                </div>
                 <h5>Mis proyectos</h5>
 
                 <div>
+
+                    <div>
+
+
+                    </div>
+
                     <nav class="dashboard_me__projects__nav">
-                        <button class="selected">Activos</button>
-                        <button>Finalizados</button>
-                        <button>En espera</button>
+                        <button id="active-tab" value="active class="selected">Activos</button>
+                        <button id="finished-tab" value = "finished">Finalizados</button>
+                        <button id="waiting-tab" value = "Waiting">En espera</button>
                     </nav>
 
                     <div id="dashboard__vacancies">

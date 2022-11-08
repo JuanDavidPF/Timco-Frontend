@@ -115,6 +115,10 @@ main {
 
 }
 
+.overview__header__projectType {
+    color: var(--darkerGray);
+}
+
 .overview__header__specialization,
 .overview__header__university {
     color: var(--darkerGray);
